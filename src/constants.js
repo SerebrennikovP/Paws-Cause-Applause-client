@@ -1,5 +1,6 @@
 export const routes = {
-    home: '/',
-    myPets: '/myPets',
-    profile: '/profile/'
-  };
+  home: '/',
+  myPets: '/myPets',
+  profile: '/profile/',
+  searchPage: '/search'
+};

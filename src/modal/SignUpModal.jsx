@@ -4,10 +4,10 @@ import Button from 'react-bootstrap/Button';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { UserContextInstance } from '../context/UserContext'
-
+import axios from 'axios';
 
 function SignUpModal(props) {
-    const { setEmail } = useContext(UserContextInstance)
+    const { setEmail, setName, setLastname } = useContext(UserContextInstance)
 
     const [inputs, setInputs] = useState({
         email: '',
@@ -27,11 +27,29 @@ function SignUpModal(props) {
         setInputs(inputs => ({ ...inputs, phone: value }));
     }
 
-    function handleSignUp() {
-        setEmail(inputs.email)
-        localStorage.setItem('email', inputs.email)
-        props.onHide();
-        window.location.reload(false);
+    async function handleSignUp() {
+        const { repassword, ...postData } = inputs;
+        try {
+            const response = await axios.post('http://localhost:8080/signUp', {
+                ...postData
+            });
+            alert('User added');
+            setEmail(inputs.email);
+            setName(inputs.name)
+            setLastname(inputs.lastname)
+
+            localStorage.setItem('email', inputs.email);
+            localStorage.setItem('name', inputs.name);
+            localStorage.setItem('lastname', inputs.lastname);
+
+            props.onHide();
+            window.location.reload(false);
+        } catch (error) {
+            if (error.response?.status === 409)
+                alert('User with this email already exists')
+            else
+                console.log(error);
+        }
     }
 
     const { email, password, repassword, phone, name, lastname } = inputs;
@@ -56,8 +74,8 @@ function SignUpModal(props) {
                     <label htmlFor="nameInput" className="form-label">Name</label>
                     <input type="text" name="name" value={name} onChange={handleInputChange} className="form-control shadow-none" id="nameInput" />
 
-                    <label htmlFor="lastNameInput" className="form-label">Lastname</label>
-                    <input type="text" name="lastname" value={lastname} onChange={handleInputChange} className="form-control shadow-none" id="lastNameInput" />
+                    <label htmlFor="lastnameInput" className="form-label">Lastname</label>
+                    <input type="text" name="lastname" value={lastname} onChange={handleInputChange} className="form-control shadow-none" id="lastnameInput" />
 
                     <PhoneInput country="il" value={phone} onChange={handlePhoneChange} />
                 </div>
@@ -69,4 +87,4 @@ function SignUpModal(props) {
     );
 }
 
-export default SignUpModal;
+export default SignUpModal

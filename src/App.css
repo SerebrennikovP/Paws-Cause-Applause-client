@@ -1,7 +1,6 @@
 .HeaderPage > div {
   cursor: default;
-  width: 25%;
-  text-align: center;
+  width: 50%;
   line-height: 60px;
 }
 
@@ -48,5 +47,9 @@
 }
 
 .HeaderProfile{
-    width: 50%!important;
+  text-align: center;
+}
+
+.HeaderPageLogoName img{
+  height:60px;
 }

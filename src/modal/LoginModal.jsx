@@ -1,14 +1,37 @@
 import React, { useContext, useState } from 'react'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
+import { UserContextInstance } from '../context/UserContext'
+
 
 function LoginModal(props) {
+    const { setEmail,setName,setLastname } = useContext(UserContextInstance)
     const [inputTextEmail, setInputTextEmail] = useState('')
     const [inputTextPassword, setInputTextPassword] = useState('')
 
-    function handleLogin() {
-        props.onHide()
-        window.location.reload(false)
+    async function handleLogin() {
+        try {
+            const response = await axios.post('http://localhost:8080/login', {
+                email: inputTextEmail,
+                password: inputTextPassword,
+            });
+            setEmail(inputTextEmail);
+            setName(response.data.name)
+            setLastname(response.data.lastname)
+
+            localStorage.setItem('email', inputTextEmail);
+            localStorage.setItem('name', response.data.name);
+            localStorage.setItem('lastname', response.data.lastname);
+
+            props.onHide();
+            window.location.reload(false);
+        } catch (error) {
+            if (error.response?.status === 404)
+                alert('User with this email is not exists')
+            else
+                console.log(error);
+        }
     }
     return (
         <Modal
