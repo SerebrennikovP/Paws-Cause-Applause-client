@@ -1,14 +1,32 @@
-import React from 'react'
-import { createContext, useState } from "react";
+import axios from 'axios';
+import React, { useEffect, createContext, useState } from 'react'
+
 
 const UserContextInstance = createContext()
 
 const UserContext = ({ children }) => {
-    const [email, setEmail] = useState(localStorage.getItem('email') || '');
-    const [name, setName] = useState(localStorage.getItem('name') || '');
-    const [lastname, setLastname] = useState(localStorage.getItem('lastname') || '');
+    const [userObj, setUserObj] = useState({})
+    const [email, setEmail] = useState('');
+    const [name, setName] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [phone, setPhone] = useState('');
+    const [id, setId] = useState(localStorage.getItem('id') || '')
+
+    useEffect(() => {
+        async function getUser() {
+            const user = await axios.post('http://localhost:8080/getUser', { "id": id })
+            setUserObj(user.data)
+            setEmail(user.data.email)
+            setName(user.data.name)
+            setLastname(user.data.lastname)
+            setPhone(user.data.phone)
+        }
+        getUser()
+    }, [id])
+
+
     return (
-        <UserContextInstance.Provider value={{ setEmail, email, name, setName, lastname, setLastname }}>
+        <UserContextInstance.Provider value={{ setEmail, email, name, setName, lastname, setLastname, phone, setPhone, id, setId }}>
             {children}
         </UserContextInstance.Provider>
     )

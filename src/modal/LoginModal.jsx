@@ -6,11 +6,12 @@ import { UserContextInstance } from '../context/UserContext'
 
 
 function LoginModal(props) {
-    const { setEmail,setName,setLastname } = useContext(UserContextInstance)
+    const { setEmail, setName, setLastname, setPhone, setId } = useContext(UserContextInstance)
     const [inputTextEmail, setInputTextEmail] = useState('')
     const [inputTextPassword, setInputTextPassword] = useState('')
 
-    async function handleLogin() {
+    async function handleLogin(e) {
+        e.preventDefault();
         try {
             const response = await axios.post('http://localhost:8080/login', {
                 email: inputTextEmail,
@@ -19,16 +20,15 @@ function LoginModal(props) {
             setEmail(inputTextEmail);
             setName(response.data.name)
             setLastname(response.data.lastname)
+            setPhone(response.data.phone)
+            setId(response.data.id)
 
-            localStorage.setItem('email', inputTextEmail);
-            localStorage.setItem('name', response.data.name);
-            localStorage.setItem('lastname', response.data.lastname);
+            localStorage.setItem('id', response.data.id);
 
             props.onHide();
-            window.location.reload(false);
         } catch (error) {
-            if (error.response?.status === 404)
-                alert('User with this email is not exists')
+            if (error.response?.status === 401)
+                alert('The email address or password is incorrect')
             else
                 console.log(error);
         }
@@ -40,24 +40,26 @@ function LoginModal(props) {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            <Modal.Header closeButton>
-                <Modal.Title id="contained-modal-title-vcenter">
-                    Login
-                </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <div className="mb-3 userName-Container">
-                    <label htmlFor="emailInput" className="form-label">E-mail</label>
-                    <input type="email" placeholder='I@love.pets' value={inputTextEmail} onChange={(e) => setInputTextEmail(e.target.value)} name="email" className="form-control shadow-none" id="emailInput" />
+            <form onSubmit={handleLogin}>
+                <Modal.Header closeButton>
+                    <Modal.Title id="contained-modal-title-vcenter">
+                        Login
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className="mb-3 userName-Container">
+                        <label htmlFor="emailInput" className="form-label">E-mail</label>
+                        <input type="email" placeholder='I@love.pets' value={inputTextEmail} onChange={(e) => setInputTextEmail(e.target.value)} name="email" className="form-control shadow-none" id="emailInput" required />
 
-                    <label htmlFor="passwordInput" className="form-label">Password</label>
-                    <input type="password" value={inputTextPassword} onChange={(e) => setInputTextPassword(e.target.value)} name="password" className="form-control shadow-none" id="passwordInput" />
+                        <label htmlFor="passwordInput" className="form-label">Password</label>
+                        <input type="password" value={inputTextPassword} onChange={(e) => setInputTextPassword(e.target.value)} name="password" className="form-control shadow-none" id="passwordInput" required />
 
-                </div>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={handleLogin} disabled={!inputTextEmail || !inputTextPassword}>Let's go!</Button>
-            </Modal.Footer>
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button type="submit">Let's go!</Button>
+                </Modal.Footer>
+            </form>
         </Modal>
     );
 }

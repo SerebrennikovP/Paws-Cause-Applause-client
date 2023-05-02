@@ -5,9 +5,19 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { UserContextInstance } from '../context/UserContext'
 import axios from 'axios';
+import * as yup from 'yup'
 
 function SignUpModal(props) {
-    const { setEmail, setName, setLastname } = useContext(UserContextInstance)
+    const { setEmail, setName, setLastname, setPhone, setId } = useContext(UserContextInstance)
+
+    const signUpSchema = yup.object().shape({
+        email: yup.string().email('Invalid email address').required('Email is required'),
+        password: yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
+        repassword: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match').required('Please confirm password'),
+        name: yup.string().required('Name is required'),
+        lastname: yup.string().required('Lastname is required'),
+        phone: yup.string().matches(/^\+?[1-9]\d{9,19}$/, 'Invalid phone number').required('Phone number is required'),
+    });
 
     const [inputs, setInputs] = useState({
         email: '',
@@ -24,65 +34,72 @@ function SignUpModal(props) {
     }
 
     function handlePhoneChange(value) {
-        setInputs(inputs => ({ ...inputs, phone: value }));
+        setInputs(inputs => ({ ...inputs, phone: '+' + value }));
     }
 
-    async function handleSignUp() {
+    async function handleSignUp(e) {
+        e.preventDefault();
         const { repassword, ...postData } = inputs;
+
         try {
-            const response = await axios.post('http://localhost:8080/signUp', {
-                ...postData
-            });
+            await signUpSchema.validate(inputs);
+
+            const response = await axios.post('http://localhost:8080/signUp', postData);
+
             alert('User added');
             setEmail(inputs.email);
-            setName(inputs.name)
-            setLastname(inputs.lastname)
+            setName(inputs.name);
+            setLastname(inputs.lastname);
+            setPhone(inputs.phone)
+            setId(response.data)
 
-            localStorage.setItem('email', inputs.email);
-            localStorage.setItem('name', inputs.name);
-            localStorage.setItem('lastname', inputs.lastname);
+            localStorage.setItem('id', response.data);
 
             props.onHide();
-            window.location.reload(false);
         } catch (error) {
-            if (error.response?.status === 409)
-                alert('User with this email already exists')
-            else
+            if (error instanceof yup.ValidationError) {
+                alert(error.message);
+            } else if (error.response?.status === 409) {
+                alert('User with this email already exists');
+            } else {
                 console.log(error);
+            }
         }
     }
 
     const { email, password, repassword, phone, name, lastname } = inputs;
-    const isFormValid = email && password && repassword && phone.length > 9 && name && lastname;
 
     return (
         <Modal {...props} size="lg" centered>
             <Modal.Header closeButton>
                 <Modal.Title>Sign up</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-                <div className="mb-3 userName-Container">
-                    <label htmlFor="emailInput" className="form-label">E-mail</label>
-                    <input type="email" name="email" value={email} onChange={handleInputChange} className="form-control shadow-none" id="emailInput" placeholder='I@love.pets' />
+            <form onSubmit={handleSignUp}>
+                <Modal.Body>
+                    <div className="mb-3 userName-Container">
+                        <label htmlFor="emailInput" className="form-label">E-mail</label>
+                        <input type="email" name="email" value={email} onChange={handleInputChange} className="form-control shadow-none" id="emailInput" placeholder='I@love.pets' />
 
-                    <label htmlFor="passwordInput" className="form-label">Password</label>
-                    <input type="password" name="password" value={password} onChange={handleInputChange} className="form-control shadow-none" id="passwordInput" />
+                        <label htmlFor="passwordInput" className="form-label">Password</label>
+                        <input type="password" name="password" value={password} onChange={handleInputChange} className="form-control shadow-none" id="passwordInput" placeholder='Minimal 8 symbols' />
 
-                    <label htmlFor="repasswordInput" className="form-label">Repeat password</label>
-                    <input type="password" name="repassword" value={repassword} onChange={handleInputChange} className="form-control shadow-none" id="repasswordInput" />
+                        <label htmlFor="repasswordInput" className="form-label">Repeat password</label>
+                        <input type="password" name="repassword" value={repassword} onChange={handleInputChange} className="form-control shadow-none" id="repasswordInput" placeholder='Confirm password' />
 
-                    <label htmlFor="nameInput" className="form-label">Name</label>
-                    <input type="text" name="name" value={name} onChange={handleInputChange} className="form-control shadow-none" id="nameInput" />
+                        <label htmlFor="nameInput" className="form-label">Name</label>
+                        <input type="text" name="name" value={name} onChange={handleInputChange} className="form-control shadow-none" id="nameInput" placeholder='Ace' />
 
-                    <label htmlFor="lastnameInput" className="form-label">Lastname</label>
-                    <input type="text" name="lastname" value={lastname} onChange={handleInputChange} className="form-control shadow-none" id="lastnameInput" />
+                        <label htmlFor="lastnameInput" className="form-label">Lastname</label>
+                        <input type="text" name="lastname" value={lastname} onChange={handleInputChange} className="form-control shadow-none" id="lastnameInput" placeholder='Ventura' />
 
-                    <PhoneInput country="il" value={phone} onChange={handlePhoneChange} />
-                </div>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={handleSignUp} disabled={!isFormValid}>Let's go!</Button>
-            </Modal.Footer>
+                        <label htmlFor="phoneInput" className="form-label" >Phone</label>
+                        <PhoneInput country="il" id="phoneInput" value={phone} onChange={handlePhoneChange} />
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button type="submit" >Let's go!</Button>
+                </Modal.Footer>
+            </form>
         </Modal>
     );
 }
