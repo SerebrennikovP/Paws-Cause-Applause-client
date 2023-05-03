@@ -8,7 +8,8 @@ const Home = () => {
     <div className="HomePage">
       <div className="">Header welcoming users to the site</div>
       <div className="">Text explaining what the service is</div>
-      <button onClick={() => navigate(routes.searchPage)} className="position-absolute start-50 translate-middle-x btn btn-lg btn-danger">Search</button>
+      <button id="searchCatsButton" onClick={() => navigate(routes.searchPageCats)} className="btn btn-lg btn-danger">Cat</button>
+      <button id="searchDogsButton" onClick={() => navigate(routes.searchPageDogs)} className="btn btn-lg btn-info">Dog</button>
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import '../CSS/header.css'
 import React from 'react'
 import HeaderProfile from './HeaderProfile'
 import logo from '../images/logo.png'

@@ -2,5 +2,6 @@ export const routes = {
   home: '/',
   myPets: '/myPets',
   profile: '/profile/',
-  searchPage: '/search'
+  searchPageCats: '/searchCats',
+  searchPageDogs: '/searchDogs',
 };

@@ -1,0 +1,12 @@
+.form-label{
+    padding-top:6px;
+  }
+  
+  .editingProfile,.editingProfile *{
+    border: 0 !important;
+    box-shadow: none!important;
+  }
+  .phone-input-wrapper *:disabled:hover{
+    cursor:text;
+  }
+  

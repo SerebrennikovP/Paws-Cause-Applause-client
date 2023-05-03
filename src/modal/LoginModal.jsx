@@ -6,21 +6,21 @@ import { UserContextInstance } from '../context/UserContext'
 
 
 function LoginModal(props) {
-    const { setEmail, setName, setLastname, setPhone, setId } = useContext(UserContextInstance)
+    const { setUserObj, setId } = useContext(UserContextInstance)
     const [inputTextEmail, setInputTextEmail] = useState('')
     const [inputTextPassword, setInputTextPassword] = useState('')
 
     async function handleLogin(e) {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:8080/login', {
+            const response = await axios.post('http://localhost:8080/user/login', {
                 email: inputTextEmail,
                 password: inputTextPassword,
             });
-            setEmail(inputTextEmail);
-            setName(response.data.name)
-            setLastname(response.data.lastname)
-            setPhone(response.data.phone)
+
+            setUserObj({
+                ...response.data,
+            })
             setId(response.data.id)
 
             localStorage.setItem('id', response.data.id);

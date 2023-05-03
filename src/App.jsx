@@ -1,4 +1,4 @@
-import './App.css';
+import './CSS/App.css';
 import React, { useEffect, useState } from 'react'
 import { Routes, Route } from 'react-router-dom';
 import { routes } from "./constants"
@@ -30,7 +30,8 @@ const App = () => {
                         <Route path={routes.home} element={<Home />} />
                         <Route path={routes.myPets} element={<MyPets />} />
                         <Route path={routes.profile} element={<Profile />} />
-                        <Route path={routes.searchPage} element={<SearchPage />} />
+                        <Route path={routes.searchPageCats} element={<SearchPage type="Cat"/>} />
+                        <Route path={routes.searchPageDogs} element={<SearchPage type="Dog"/>} />
                     </Routes>
                 </div>}
         </UserContext>

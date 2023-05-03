@@ -8,7 +8,7 @@ import axios from 'axios';
 import * as yup from 'yup'
 
 function SignUpModal(props) {
-    const { setEmail, setName, setLastname, setPhone, setId } = useContext(UserContextInstance)
+    const { setId, setUserObj } = useContext(UserContextInstance)
 
     const signUpSchema = yup.object().shape({
         email: yup.string().email('Invalid email address').required('Email is required'),
@@ -44,13 +44,14 @@ function SignUpModal(props) {
         try {
             await signUpSchema.validate(inputs);
 
-            const response = await axios.post('http://localhost:8080/signUp', postData);
+            const response = await axios.post('http://localhost:8080/user/signUp', postData);
 
             alert('User added');
-            setEmail(inputs.email);
-            setName(inputs.name);
-            setLastname(inputs.lastname);
-            setPhone(inputs.phone)
+
+            setUserObj({
+                ...postData,
+                id: response.data
+            })
             setId(response.data)
 
             localStorage.setItem('id', response.data);
