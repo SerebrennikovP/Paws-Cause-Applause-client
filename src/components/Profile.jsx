@@ -22,7 +22,7 @@ const Profile = () => {
     name,
     lastname,
     phone,
-    bio,
+    bio: bio || '',
     email,
   });
 

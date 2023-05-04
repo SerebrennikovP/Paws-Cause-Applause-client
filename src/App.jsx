@@ -9,6 +9,7 @@ import Home from './components/Home';
 import Profile from './components/Profile';
 import SearchPage from './components/SearchPage';
 import LoadingPage from './components/Loading';
+import PetPage from './components/PetPage';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
@@ -32,6 +33,7 @@ const App = () => {
                         <Route path={routes.profile} element={<Profile />} />
                         <Route path={routes.searchPageCats} element={<SearchPage type="Cat"/>} />
                         <Route path={routes.searchPageDogs} element={<SearchPage type="Dog"/>} />
+                        <Route path={routes.petPage} element={<PetPage/>} />
                     </Routes>
                 </div>}
         </UserContext>
