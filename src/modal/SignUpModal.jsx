@@ -8,7 +8,7 @@ import axios from 'axios';
 import * as yup from 'yup'
 
 function SignUpModal(props) {
-    const { setId, setUserObj } = useContext(UserContextInstance)
+    const { setToken } = useContext(UserContextInstance)
 
     const signUpSchema = yup.object().shape({
         email: yup.string().email('Invalid email address').required('Email is required'),
@@ -48,13 +48,9 @@ function SignUpModal(props) {
 
             alert('User added');
 
-            setUserObj({
-                ...postData,
-                id: response.data
-            })
-            setId(response.data)
+            setToken(response.data)
 
-            localStorage.setItem('id', response.data);
+            localStorage.setItem('token', response.data);
 
             props.onHide();
         } catch (error) {

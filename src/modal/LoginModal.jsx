@@ -6,7 +6,7 @@ import { UserContextInstance } from '../context/UserContext'
 
 
 function LoginModal(props) {
-    const { setUserObj, setId } = useContext(UserContextInstance)
+    const { setToken } = useContext(UserContextInstance)
     const [inputTextEmail, setInputTextEmail] = useState('')
     const [inputTextPassword, setInputTextPassword] = useState('')
 
@@ -18,12 +18,9 @@ function LoginModal(props) {
                 password: inputTextPassword,
             });
 
-            setUserObj({
-                ...response.data,
-            })
-            setId(response.data.id)
+            setToken(response.data)
 
-            localStorage.setItem('id', response.data.id);
+            localStorage.setItem('token', response.data);
 
             props.onHide();
         } catch (error) {

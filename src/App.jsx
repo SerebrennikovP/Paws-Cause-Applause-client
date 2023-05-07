@@ -10,6 +10,7 @@ import Profile from './components/Profile';
 import SearchPage from './components/SearchPage';
 import LoadingPage from './components/Loading';
 import PetPage from './components/PetPage';
+import PetContext from './context/PetContext';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
@@ -24,18 +25,20 @@ const App = () => {
 
     return (
         <UserContext>
-            {loading ? <LoadingPage /> :
-                <div className='App'>
-                    <HeaderPage />
-                    <Routes>
-                        <Route path={routes.home} element={<Home />} />
-                        <Route path={routes.myPets} element={<MyPets />} />
-                        <Route path={routes.profile} element={<Profile />} />
-                        <Route path={routes.searchPageCats} element={<SearchPage type="Cat"/>} />
-                        <Route path={routes.searchPageDogs} element={<SearchPage type="Dog"/>} />
-                        <Route path={routes.petPage} element={<PetPage/>} />
-                    </Routes>
-                </div>}
+            <PetContext>
+                {loading ? <LoadingPage /> :
+                    <div className='App'>
+                        <HeaderPage />
+                        <Routes>
+                            <Route path={routes.home} element={<Home />} />
+                            <Route path={routes.myPets} element={<MyPets />} />
+                            <Route path={routes.profile} element={<Profile />} />
+                            <Route path={routes.searchPageCats} element={<SearchPage type="Cat" />} />
+                            <Route path={routes.searchPageDogs} element={<SearchPage type="Dog" />} />
+                            <Route path={routes.petPage} element={<PetPage />} />
+                        </Routes>
+                    </div>}
+            </PetContext>
         </UserContext>
     );
 };

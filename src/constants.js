@@ -4,5 +4,5 @@ export const routes = {
   profile: '/profile/',
   searchPageCats: '/searchCats',
   searchPageDogs: '/searchDogs',
-  petPage:'/PetPage',
+  petPage:'/PetPage/:pet_id',
 };

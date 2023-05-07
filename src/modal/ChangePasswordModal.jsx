@@ -6,7 +6,7 @@ import axios from 'axios';
 import * as yup from 'yup'
 
 function ChangePasswordModal(props) {
-    const { id, setUserObj, userObj } = useContext(UserContextInstance)
+    const { token, userObj } = useContext(UserContextInstance)
 
     const signUpSchema = yup.object().shape({
         password: yup.string().min(8, 'Password must be at least 8 characters').required('Password is required'),
@@ -34,15 +34,13 @@ function ChangePasswordModal(props) {
                 ...userObj,
                 password: inputs.password
             }
-            
-            const response = await axios.put(`http://localhost:8080/user/changeUser/${id}`, updatedUserObj);
+
+            const response = await axios.put(`http://localhost:8080/user/changeUser/${token}`, updatedUserObj, { headers: { Authorization: `Bearer ${token}` } });
             setInputs({
                 password: '',
                 repassword: '',
             })
-            setUserObj({
-                ...userObj,
-            })
+
             alert('Password has been changed');
             props.onHide();
         } catch (error) {

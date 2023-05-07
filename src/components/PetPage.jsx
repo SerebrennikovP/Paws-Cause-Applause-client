@@ -1,45 +1,46 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useParams } from "react-router-dom";
 import "../CSS/petPage.css";
+import { PetContextInstance } from '../context/PetContext'
+import axios from 'axios';
 
-function PetPage({  onSaveForLater, onAdopt, onFoster, onReturn }) {
+
+    function PetPage() {
+
     const [isSaved, setIsSaved] = useState(false);
+    const [pet, setPet] = useState({})
 
-    const pet = {
-        "type": "Cat",
-        "name": "Rajah",
-        "adoptionStatus": "Available",
-        "picture": "https://cdn2.thecatapi.com/images/8NdgktL3E.jpg",
-        "height": 4,
-        "weight": 65,
-        "color": "Brown Tabby",
-        "bio": "",
-        "hypoallergnic": true,
-        "dietery": [],
-        "breed": "Domestic Shorthair Mix",
-        "id": "i0oq8e3by",
-        "owner":""
-    }
+    const {pet_id} = useParams()
 
-    function handleSaveForLater() {
-        setIsSaved(true);
-        onSaveForLater(pet);
-    }
+    useEffect(() => {
+        async function getPet() {
+            const data = await axios.get(`http://localhost:8080/pet/petpage/${pet_id}`)
+            setPet(data.data)
+            console.log(data)
+        }
+        getPet()
+    }, [])
 
-    function handleUnsave() {
-        setIsSaved(false);
-    }
+    // function handleSaveForLater() {
+    //     setIsSaved(true);
+    //     onSaveForLater(pet);
+    // }
 
-    function handleAdopt() {
-        onAdopt(pet);
-    }
+    // function handleUnsave() {
+    //     setIsSaved(false);
+    // }
 
-    function handleFoster() {
-        onFoster(pet);
-    }
+    // function handleAdopt() {
+    //     onAdopt(pet);
+    // }
 
-    function handleReturn() {
-        onReturn(pet);
-    }
+    // function handleFoster() {
+    //     onFoster(pet);
+    // }
+
+    // function handleReturn() {
+    //     onReturn(pet);
+    // }
 
     return (
         <div className='PetPage'>
@@ -53,9 +54,9 @@ function PetPage({  onSaveForLater, onAdopt, onFoster, onReturn }) {
             <p>Color: {pet.color}</p>
             <p>Bio: {pet.bio}</p>
             <p>Hypoallergenic: {pet.hypoallergenic ? 'Yes' : 'No'}</p>
-            <p>Dietary Restrictions: {pet.dietery.join(', ')}</p>
+            {/* <p>Dietary Restrictions: {pet.dietery.join(', ')}</p> */}
 
-            {pet.owner && (
+            {/* {pet.owner && (
                 <button onClick={handleReturn}>Return to Adoption Center</button>
             )}
 
@@ -76,7 +77,7 @@ function PetPage({  onSaveForLater, onAdopt, onFoster, onReturn }) {
 
             {isSaved && (
                 <button onClick={handleUnsave}>Unsave</button>
-            )}
+            )} */}
         </div>
     );
 }

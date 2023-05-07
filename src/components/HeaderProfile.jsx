@@ -9,18 +9,18 @@ import { ReactComponent as UserSVG } from '../images/user-solid.svg'
 
 const HeaderProfile = () => {
 
-    const { id, name, lastname, setId } = useContext(UserContextInstance)
+    const { token, name, lastname, setToken } = useContext(UserContextInstance)
     const [modalSignUpShow, setModalSignUpShow] = useState(false)
     const [modalLoginShow, setModalLoginShow] = useState(false)
 
     function SignOut() {
         localStorage.clear()
-        setId('')
+        setToken('')
     }
 
     return (
         <div className="HeaderProfile">
-            {id ?
+            {token ?
                 <div className="dropdown LoggedIn">
                     <UserSVG className='userSVG' />
                     <span className="dropdown-btn LoggedIn">{name} {lastname}</span>

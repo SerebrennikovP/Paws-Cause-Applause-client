@@ -6,19 +6,19 @@ const UserContextInstance = createContext()
 
 const UserContext = ({ children }) => {
     const [userObj, setUserObj] = useState({})
-    const [id, setId] = useState(localStorage.getItem('id') || '')
+    const [token, setToken] = useState(localStorage.getItem('token') || '')
 
     useEffect(() => {
         async function getUser() {
-            const user = await axios.post('http://localhost:8080/user/getUser', { "id": id })
+            const user = await axios.post('http://localhost:8080/user/getUser', { "token": token })
             setUserObj(user.data)
         }
         getUser()
-    }, [id])
+    }, [token])
 
 
     return (
-        <UserContextInstance.Provider value={{ email: userObj.email, name: userObj.name, lastname: userObj.lastname, phone: userObj.phone, id, setId, userObj, setUserObj, bio: userObj.bio }}>
+        <UserContextInstance.Provider value={{ email: userObj.email, name: userObj.name, lastname: userObj.lastname, phone: userObj.phone, token, setToken, userObj, setUserObj, bio: userObj.bio }}>
             {children}
         </UserContextInstance.Provider>
     )

@@ -1,5 +1,7 @@
 import '../CSS/profile.css';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { routes } from "../constants"
 import { UserContextInstance } from '../context/UserContext'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
@@ -8,7 +10,11 @@ import axios from 'axios';
 import ChangePasswordModal from '../modal/ChangePasswordModal'
 
 const Profile = () => {
-  const { email, name, lastname, phone, userObj, setUserObj, bio, id } = useContext(UserContextInstance)
+  const navigate = useNavigate()
+  const { email, name, lastname, phone, userObj, setUserObj, bio, token } = useContext(UserContextInstance)
+
+  useEffect(() => { !token && navigate(routes.home) }, [])
+
   const [isChangePassword, setIsChangePassword] = useState(false)
   const [isEditing, setIsEditing] = useState(true)
 
@@ -52,7 +58,7 @@ const Profile = () => {
         }
         setUserObj(updatedUserObj)
 
-        const response = await axios.put(`http://localhost:8080/user/changeUser/${id}`, updatedUserObj);
+        const response = await axios.put(`http://localhost:8080/user/changeUser/${token}`, updatedUserObj, { headers: { Authorization: `Bearer ${token}` } });
 
         alert('Changes saved');
 
@@ -68,7 +74,7 @@ const Profile = () => {
     } else setIsEditing(!isEditing)
   }
 
-  return (
+  return (token &&
     <>
       <form onSubmit={handleChangeUser}>
         <div className="mb-3 container userName-Container">
