@@ -6,3 +6,5 @@ export const routes = {
   searchPageDogs: '/searchDogs',
   petPage:'/PetPage/:pet_id',
 };
+
+export const statusOptions = [{ label: "Available", value: "Available" }, { label: "Fostered", value: "Fostered" }, { label: "All", value: "All" }];

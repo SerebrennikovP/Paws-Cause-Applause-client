@@ -44,3 +44,13 @@
     margin-top: 50px;
   }
   
+  .card-pet{
+    height:300px;
+    width:250px;
+  }
+
+  .card-pet *{
+    width:100%;
+    padding:0;
+    margin:0;
+  }
