@@ -47,6 +47,7 @@ const HeaderProfile = () => {
                         <SignUpModal
                             show={modalSignUpShow}
                             onHide={() => setModalSignUpShow(false)}
+                            onClickLogin={() => setModalLoginShow(true)}
                         />
                     </div>
                 </div>}

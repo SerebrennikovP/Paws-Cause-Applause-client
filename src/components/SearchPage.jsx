@@ -15,7 +15,7 @@ function SearchPage({ type }) {
   const [weightRange, setWeightRange] = useState([0, type == "Dog" ? 40 : 20]);
   const [searchName, setSearchName] = useState("");
   const [selectedOptionBreed, setSelectedOptionBreed] = useState(null);
-  const [adoptionStatus, setAdoptionstatus] = useState({ label: "Available", value: "Available" });
+  const [adoptionStatus, setAdoptionstatus] = useState({ label: "All", value: "All" });
 
   useEffect(() => {
     const fetchBreeds = async () => {

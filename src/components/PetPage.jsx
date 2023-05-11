@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from "react-router-dom";
 import "../CSS/petPage.css";
 import { PetContextInstance } from '../context/PetContext'
+import { UserContextInstance } from '../context/UserContext'
 import axios from 'axios';
 
 
 function PetPage() {
 
+    const { userId, token } = useContext(UserContextInstance)
     const [isSaved, setIsSaved] = useState(false);
     const [pet, setPet] = useState({})
-
+    const [returnButton, setReturnButton] = useState(true)
     const { pet_id } = useParams()
 
     useEffect(() => {
@@ -32,17 +34,23 @@ function PetPage() {
     //     setIsSaved(false);
     // }
 
-    // function handleAdopt() {
-    //     onAdopt(pet);
-    // }
+    function handleAdopt() {
+        console.log('handleAdopt')
+        // onAdopt(pet);
+    }
 
-    // function handleFoster() {
-    //     onFoster(pet);
-    // }
+    function handleFoster() {
+        console.log('handleFoster')
+        // onFoster(pet);
+    }
 
-    // function handleReturn() {
-    //     onReturn(pet);
-    // }
+    async function handleReturn() {
+        console.log('handleReturn')
+        setReturnButton(false)
+        pet.owner_id = ''
+        const response = await axios.put(`http://localhost:8080/pet/changeStatus/${pet_id}`, {"handler":"return", "owner_id": "" }, { headers: { Authorization: `Bearer ${token}` } });
+
+    }
 
     return (
         <div className='PetPage'>
@@ -55,24 +63,24 @@ function PetPage() {
             <p>Color: {pet.color}</p>
             {pet.bio && <p>Bio: {pet.bio}</p>}
             <p>Hypoallergenic: {pet.hypoallergenic ? 'Yes' : 'No'}</p>
-            <p>Dietary Restrictions: {pet.dietary_restrictions}</p>
+            {pet.dietary_restrictions && <p>Dietary Restrictions: {pet.dietary_restrictions}</p>}
 
-            {/* {pet.owner && (
+            {pet.owner_id === userId && returnButton && (
                 <button onClick={handleReturn}>Return to Adoption Center</button>
             )}
 
-            {!pet.owner && pet.adoptionStatus === 'Available' && (
+            {!pet.owner_id && pet.adoption_status === 'Available' && (
                 <>
                     <button onClick={handleAdopt}>Adopt</button>
                     <button onClick={handleFoster}>Foster</button>
                 </>
             )}
 
-            {!pet.owner && pet.adoptionStatus === 'Fostered' && (
+            {!pet.owner_id && pet.adoption_status === 'Fostered' && (
                 <button onClick={handleAdopt}>Adopt</button>
             )}
 
-            {!isSaved && (
+            {/* {!isSaved && (
                 <button onClick={handleSaveForLater}>Save for Later</button>
             )}
 

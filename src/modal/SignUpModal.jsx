@@ -7,7 +7,7 @@ import { UserContextInstance } from '../context/UserContext'
 import axios from 'axios';
 import * as yup from 'yup'
 
-function SignUpModal(props) {
+function SignUpModal({onClickLogin, ...props}) {
     const { setToken } = useContext(UserContextInstance)
 
     const signUpSchema = yup.object().shape({
@@ -64,6 +64,11 @@ function SignUpModal(props) {
         }
     }
 
+    function handleAlreadyHave() {
+        props.onHide();
+        onClickLogin()
+    }
+
     const { email, password, repassword, phone, name, lastname } = inputs;
 
     return (
@@ -92,9 +97,10 @@ function SignUpModal(props) {
                         <label htmlFor="phoneInput" className="form-label" >Phone</label>
                         <PhoneInput country="il" id="phoneInput" value={phone} onChange={handlePhoneChange} />
                     </div>
+                    <Button type="submit" >Let's go!</Button>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button type="submit" >Let's go!</Button>
+                    <div className="already-have-account">Already have an account?<p onClick={handleAlreadyHave}>Log in</p></div>
                 </Modal.Footer>
             </form>
         </Modal>

@@ -12,7 +12,6 @@ const Home = () => {
     const getRandomPets = async () => {
       try {
         const response = await axios.get('http://localhost:8080/pet/getRandom');
-        console.log(response.data)
         setRandomPets(response.data);
       } catch (error) {
         console.error(error);
