@@ -1,55 +1,52 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from "react-router-dom";
 import "../CSS/petPage.css";
-import { PetContextInstance } from '../context/PetContext'
+// import { PetContextInstance } from '../context/PetContext'
 import { UserContextInstance } from '../context/UserContext'
 import axios from 'axios';
 
 
 function PetPage() {
 
-    const { userId, token } = useContext(UserContextInstance)
-    const [isSaved, setIsSaved] = useState(false);
+    const { userId, token, setModalSignUpShow } = useContext(UserContextInstance)
     const [pet, setPet] = useState({})
-    const [returnButton, setReturnButton] = useState(true)
+    const [buttons, setButtons] = useState({ "return": true, "foster": true, "adopt": true })
+
     const { pet_id } = useParams()
 
     useEffect(() => {
         async function getPet() {
             const data = await axios.get(`http://localhost:8080/pet/petpage/${pet_id}`)
-            data.data.dietary_restrictions = Object.entries(JSON.parse(data.data.dietary_restrictions))
-                .filter(([key, value]) => !value)
-                .map(([key, value]) => key).join(', ').toUpperCase()
             setPet(data.data)
         }
         getPet()
-    }, [])
+    }, [buttons])
 
-    // function handleSaveForLater() {
-    //     setIsSaved(true);
-    //     onSaveForLater(pet);
-    // }
-
-    // function handleUnsave() {
-    //     setIsSaved(false);
-    // }
-
-    function handleAdopt() {
-        console.log('handleAdopt')
-        // onAdopt(pet);
+    async function handleAdopt() {
+        if (!token) setModalSignUpShow(true)
+        else {
+            pet.owner_id = userId;
+            const response = await axios.put(`http://localhost:8080/pet/changeStatus/${pet_id}`, { "handler": "adopt", "owner_id": userId }, { headers: { Authorization: `Bearer ${token}` } })
+            setButtons({ "return": true, "foster": false, "adopt": false })
+        }
     }
 
-    function handleFoster() {
-        console.log('handleFoster')
-        // onFoster(pet);
+    async function handleFoster() {
+        if (!token) setModalSignUpShow(true)
+        else {
+            pet.owner_id = userId;
+            const response = await axios.put(`http://localhost:8080/pet/changeStatus/${pet_id}`, { "handler": "foster", "owner_id": userId }, { headers: { Authorization: `Bearer ${token}` } });
+            setButtons({ "return": true, "foster": false, "adopt": true })
+        }
     }
 
     async function handleReturn() {
-        console.log('handleReturn')
-        setReturnButton(false)
-        pet.owner_id = ''
-        const response = await axios.put(`http://localhost:8080/pet/changeStatus/${pet_id}`, {"handler":"return", "owner_id": "" }, { headers: { Authorization: `Bearer ${token}` } });
-
+        if (!token) setModalSignUpShow(true)
+        else {
+            pet.owner_id = ''
+            const response = await axios.put(`http://localhost:8080/pet/changeStatus/${pet_id}`, { "handler": "return", "owner_id": "" }, { headers: { Authorization: `Bearer ${token}` } });
+            setButtons({ "return": false, "foster": true, "adopt": true })
+        }
     }
 
     return (
@@ -65,28 +62,20 @@ function PetPage() {
             <p>Hypoallergenic: {pet.hypoallergenic ? 'Yes' : 'No'}</p>
             {pet.dietary_restrictions && <p>Dietary Restrictions: {pet.dietary_restrictions}</p>}
 
-            {pet.owner_id === userId && returnButton && (
+            {pet.adoption_status === 'Fostered' && buttons.adopt === true && <button onClick={handleAdopt}>Adopt</button>}
+
+            {(pet.owner_id === userId && (pet.adoption_status === 'Fostered' || pet.adoption_status === 'Adopted')) && buttons.return === true && (
                 <button onClick={handleReturn}>Return to Adoption Center</button>
             )}
 
-            {!pet.owner_id && pet.adoption_status === 'Available' && (
+
+            {!pet.owner_id && pet.adoption_status === 'Available' && buttons.foster === true && buttons.adopt === true && (
                 <>
                     <button onClick={handleAdopt}>Adopt</button>
                     <button onClick={handleFoster}>Foster</button>
                 </>
             )}
 
-            {!pet.owner_id && pet.adoption_status === 'Fostered' && (
-                <button onClick={handleAdopt}>Adopt</button>
-            )}
-
-            {/* {!isSaved && (
-                <button onClick={handleSaveForLater}>Save for Later</button>
-            )}
-
-            {isSaved && (
-                <button onClick={handleUnsave}>Unsave</button>
-            )} */}
         </div>
     );
 }

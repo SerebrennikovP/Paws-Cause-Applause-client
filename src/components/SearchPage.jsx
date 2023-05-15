@@ -43,7 +43,6 @@ function SearchPage({ type }) {
           status: adoptionStatus.value
         }
       })
-      console.log(response.data)
       setFiltredPets(response.data)
     }, 1000);
     return () => clearTimeout(debounceParams.current);

@@ -18,9 +18,10 @@ function LoginModal(props) {
                 password: inputTextPassword,
             });
 
-            setToken(response.data)
+            setToken(response.data.token)
 
-            localStorage.setItem('token', response.data);
+            localStorage.setItem('token', response.data.token)
+            localStorage.setItem('expirationDate', response.data.expirationDate)
 
             props.onHide();
         } catch (error) {

@@ -74,7 +74,7 @@ const Profile = () => {
     } else setIsEditing(!isEditing)
   }
 
-  return (token &&
+  return (token && name &&
     <>
       <form onSubmit={handleChangeUser}>
         <div className="mb-3 container userName-Container">
