@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../constants";
 import axios from "axios";
@@ -12,6 +12,8 @@ import sadCat from "../images/sad-cat.png";
 import happyCat from "../images/happy-cat.png";
 import sadDog from "../images/sad-dog.png";
 import happyDog from "../images/happy-dog.png";
+import { UserContextInstance } from '../context/UserContext'
+
 
 const Home = () => {
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ const Home = () => {
   const [isVisibleBar, setIsVisibleBar] = useState(true);
   const [isHoveringCat, setIsHoveringCat] = useState(false);
   const [isHoveringDog, setIsHoveringDog] = useState(false);
+  const { modalSignUpShow } = useContext(UserContextInstance)
 
   useEffect(() => {
     const getRandomPets = async () => {
@@ -35,7 +38,7 @@ const Home = () => {
         }, 1000);
         setTimeout(() => {
           setActive(true);
-        }, 5300);
+        }, 6300);
       } catch (error) {
         console.error(error);
       }
@@ -47,29 +50,44 @@ const Home = () => {
     setIntervalId(
       setInterval(() => {
         setUpdater((prev) => prev + 1);
-      }, 6000)
+      }, 7000)
     );
     return () => clearInterval(intervalId);
   }, []);
 
   const handleMouseEnter = () => {
-    clearInterval(intervalId);
-    setIsVisibleBar(false);
+    if (!modalSignUpShow) {
+      clearInterval(intervalId);
+      setIsVisibleBar(false)
+    };
   };
 
   const handleMouseLeave = () => {
-    setIntervalId(
-      setInterval(() => {
-        setUpdater((prev) => prev + 1);
-      }, 6000)
-    );
-    setIsVisibleBar(true);
+    if (!modalSignUpShow) {
+      setIntervalId(
+        setInterval(() => {
+          setUpdater((prev) => prev + 1);
+        }, 7000)
+      );
+      setIsVisibleBar(true)
+    };
   };
+
+  useEffect(() => {
+    modalSignUpShow && handleMouseEnter()
+  }, [modalSignUpShow])
 
   return (
     <div className="HomePage">
-      <div className="">Header welcoming users to the site</div>
-      <div className="">Text explaining what the service is</div>
+      <div className="head-homepage">
+        <div className="slogan-homepage">CONNECTING SOULS,<br /> CHANGING LIVES</div>
+        <div className="about-homepage">Find your perfect furry companion and give them a forever home with our easy-to-use platform featuring pets from over 1,500 shelters and rescues.</div>
+      </div>
+
+      <div className="search-splitter">
+        <span className="search-splitter-cat" onClick={() => navigate(routes.searchPageCats)}><span className="arrows-home-page-cat">&#8681;&#8681;&#8681;</span> SEARCH CAT <span className="arrows-home-page-cat">&#8681;&#8681;&#8681;</span></span>
+        <span className="search-splitter-dog" onClick={() => navigate(routes.searchPageDogs)}><span className="arrows-home-page-dog">&#8681;&#8681;&#8681;</span> SEARCH DOG <span className="arrows-home-page-dog">&#8681;&#8681;&#8681;</span></span>
+      </div>
 
       <div className="search-by-animal-wrapper">
         <span className="cat-homepage">
@@ -127,10 +145,10 @@ const Home = () => {
                 changeBar === 0
                   ? bar0
                   : changeBar === 1
-                  ? bar1
-                  : changeBar === 2
-                  ? bar2
-                  : bar3
+                    ? bar1
+                    : changeBar === 2
+                      ? bar2
+                      : bar3
               }
             ></img>
           </div>

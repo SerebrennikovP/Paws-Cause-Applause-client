@@ -13,7 +13,7 @@ const HeaderPage = () => {
       <div className="HeaderPageLogoName">
         <NavLink to={routes.home}>
           <img src={logo} alt="logo" />
-          Name Company
+          <span className='paws website-name'>PAWS</span><span className='cause website-name'>CAUSE</span><span className='applause website-name'>APPLAUSE</span>
         </NavLink></div>
       <HeaderProfile />
     </div >

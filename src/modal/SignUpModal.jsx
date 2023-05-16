@@ -75,7 +75,7 @@ function SignUpModal({onClickLogin, ...props}) {
     return (
         <Modal {...props} size="lg" centered>
             <Modal.Header closeButton>
-                <Modal.Title>Sign up</Modal.Title>
+                <Modal.Title>SIGN UP</Modal.Title>
             </Modal.Header>
             <form onSubmit={handleSignUp}>
                 <Modal.Body>
@@ -98,10 +98,10 @@ function SignUpModal({onClickLogin, ...props}) {
                         <label htmlFor="phoneInput" className="form-label" >Phone</label>
                         <PhoneInput country="il" id="phoneInput" value={phone} onChange={handlePhoneChange} />
                     </div>
-                    <Button type="submit" >Let's go!</Button>
+                    <Button type="submit" >LET'S GO!</Button>
                 </Modal.Body>
                 <Modal.Footer>
-                    <div className="already-have-account">Already have an account?<p onClick={handleAlreadyHave}>Log in</p></div>
+                    <div className="already-have-account">Already have an account?<span onClick={handleAlreadyHave}>LOGIN</span></div>
                 </Modal.Footer>
             </form>
         </Modal>

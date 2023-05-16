@@ -1,3 +1,15 @@
+/* Color schema 
+#f9eee2 Linen
+#ffbdff Pink
+#005fff Blue
+#ffff00 Yellow
+#ff5b00 Orange
+#8b4100 Brown */
+
+*{
+  font-family: 'Quicksand', sans-serif;
+}
+
 body {
     background: #f9eee2
   }

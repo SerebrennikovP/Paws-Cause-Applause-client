@@ -1,11 +1,30 @@
+.head-homepage {
+}
+.slogan-homepage {
+  text-align: center;
+  font-size: 3.5rem;
+  padding-top: 1.5rem;
+  color: #ff5b00;
+  font-family: "Unbounded";
+  font-weight: 900;
+}
+
+.about-homepage {
+  width: 830px;
+  margin: auto;
+  text-align: center;
+  font-size: 1.5rem;
+  color: #8b4100;
+}
+
 .random-pets-wrapper {
   position: relative;
   margin-top: 16px;
-  margin-bottom:1rem
+  margin-bottom: 1rem;
 }
 
-.dog-homepage{
-    margin:auto
+.dog-homepage {
+  margin: auto;
 }
 
 .random-pets {
@@ -89,4 +108,36 @@
   right: 0;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
+}
+
+.search-splitter {
+  width: 100%;
+  background-color: #ffff00;
+  padding: 0;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+.search-splitter span {
+  color: #005fff;
+  font-size: 2rem;
+  padding: 0.5rem 0;
+  font-family: "Unbounded";
+  font-weight: 900;
+  width: 50%;
+  text-align: center;
+}
+
+.arrows-home-page-cat,
+.arrows-home-page-dog {
+  opacity: 0;
+}
+
+.search-splitter:hover {
+  cursor: pointer;
+}
+
+.search-splitter-cat:hover .arrows-home-page-cat,
+.search-splitter-dog:hover .arrows-home-page-dog {
+  opacity: 1;
 }

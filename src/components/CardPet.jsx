@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -10,9 +10,12 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import { useNavigate } from 'react-router-dom'
 import { routes } from "../constants"
+import "../CSS/cardPet.css"
+import { UserContextInstance } from '../context/UserContext'
 
 
 export default function CardPet({ pet }) {
+    const { token, setModalSignUpShow } = useContext(UserContextInstance)
     const navigate = useNavigate()
 
     async function handleClick() {
@@ -22,6 +25,7 @@ export default function CardPet({ pet }) {
     const [favorited, setFavorited] = useState(false)
 
     const handleFavorite = () => {
+        if (!token) setModalSignUpShow(true)
         setFavorited(!favorited)
     };
 
@@ -34,7 +38,7 @@ export default function CardPet({ pet }) {
         <Card sx={{
             height: 400, width: 300, mx: 2, my: 2,color: '#f9eee2', boxShadow: '0 8px 16px rgba(0, 0, 0, 0.7)', borderRadius: '12px', background: '#005fff'}}>
             <CardHeader
-                title={pet.name}
+                title={pet.name?.toUpperCase()}
                 subheader={pet.adoption_status}
                 sx={{ px: 2, py: 1, height: 70, cursor: 'pointer' }}
                 onClick={handleClick} />

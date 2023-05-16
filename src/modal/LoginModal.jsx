@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { UserContextInstance } from '../context/UserContext'
+import "../CSS/modals.css"
 
 
 function LoginModal(props) {
@@ -41,7 +42,7 @@ function LoginModal(props) {
             <form onSubmit={handleLogin}>
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Login
+                        LOGIN
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -55,7 +56,7 @@ function LoginModal(props) {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button type="submit">Let's go!</Button>
+                    <Button type="submit">LET'S GO!</Button>
                 </Modal.Footer>
             </form>
         </Modal>

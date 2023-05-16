@@ -1,0 +1,33 @@
+.modal-content {
+  background-color: #005fff;
+  border-radius: 0;
+  color: #f9eee2;
+}
+
+.modal-content * {
+  border: 0;
+}
+.modal-content .btn {
+  width: 100%;
+  background-color: #ffff00;
+  color: #005fff;
+  font-family: "Unbounded";
+  font-weight: 900;
+}
+
+.modal-title {
+  font-family: "Unbounded";
+  font-weight: 900;
+  color: #ffff00;
+}
+
+.already-have-account span {
+    margin-left:2rem;
+    font-family: "Unbounded";
+    font-weight: 900;
+    color: #ffff00;
+  }
+  .already-have-account span:hover {
+    cursor: pointer;
+  }
+  

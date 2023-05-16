@@ -17,26 +17,26 @@ const HeaderProfile = () => {
             {token ?
                 <div className="dropdown LoggedIn">
                     <UserSVG className='userSVG' />
-                    <span className="dropdown-btn LoggedIn">{name} {lastname}</span>
+                    <span className="dropdown-btn LoggedIn">{name?.toUpperCase()} {lastname?.toUpperCase()}</span>
                     <div className="dropdown-content LoggedIn">
-                        <NavLink to={routes.profile}>Profile settings</NavLink>
-                        <NavLink to={routes.myPets}>My pets</NavLink>
-                        <div onClick={SignOut}>Sign out</div>
+                        <NavLink to={routes.profile}>PROFILE SETTINGS</NavLink>
+                        <NavLink to={routes.myPets}>MY PETS</NavLink>
+                        <div onClick={SignOut}>SIGN OUT</div>
                     </div>
                 </div>
                 :
                 <div className="dropdown LoggedOut">
-                    <div className="dropdown-btn LoggedOut">Authorize</div>
+                    <div className="dropdown-btn LoggedOut">AUTHORIZE</div>
                     <div className="dropdown-content LoggedOut">
                         <div onClick={() => setModalLoginShow(true)}>
-                            Login
+                            LOGIN
                         </div>
                         <LoginModal
                             show={modalLoginShow}
                             onHide={() => setModalLoginShow(false)}
                         />
                         <div onClick={() => setModalSignUpShow(true)}>
-                            SignUp
+                            SIGN UP
                         </div>
                         <SignUpModal
                             show={modalSignUpShow}

@@ -55,7 +55,7 @@ function ChangePasswordModal(props) {
     return (
         <Modal {...props} size="sm" centered>
             <Modal.Header closeButton>
-                <Modal.Title>Change password</Modal.Title>
+                <Modal.Title>CHANGE PASSWORD</Modal.Title>
             </Modal.Header>
             <form onSubmit={handleChangePassword}>
                 <Modal.Body>
@@ -69,7 +69,7 @@ function ChangePasswordModal(props) {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button type="submit" >Save password</Button>
+                    <Button type="submit" >SAVE PASSWORD</Button>
                 </Modal.Footer>
             </form>
         </Modal>
