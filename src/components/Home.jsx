@@ -13,7 +13,7 @@ import happyCat from "../images/happy-cat.png";
 import sadDog from "../images/sad-dog.png";
 import happyDog from "../images/happy-dog.png";
 import { UserContextInstance } from '../context/UserContext'
-
+import { ToastContainer } from 'react-toastify';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -59,6 +59,7 @@ const Home = () => {
     if (!modalSignUpShow) {
       clearInterval(intervalId);
       setIsVisibleBar(false)
+      setActive(true)
     };
   };
 
@@ -70,6 +71,7 @@ const Home = () => {
         }, 7000)
       );
       setIsVisibleBar(true)
+      setActive(true)
     };
   };
 
@@ -138,6 +140,7 @@ const Home = () => {
               <CardPet key={pet.pet_id} pet={pet} />
             ))}
         </div>
+        <ToastContainer />
         {isVisibleBar && (
           <div className={`overlay-layer ${active ? "in" : "out"}`}>
             <img

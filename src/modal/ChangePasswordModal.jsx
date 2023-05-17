@@ -3,7 +3,9 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { UserContextInstance } from '../context/UserContext'
 import axios from 'axios';
-import * as yup from 'yup'
+import * as yup from 'yup';
+import { ToastContainer, toast, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ChangePasswordModal(props) {
     const { token, userObj } = useContext(UserContextInstance)
@@ -41,11 +43,31 @@ function ChangePasswordModal(props) {
                 repassword: '',
             })
 
-            alert('Password has been changed');
+            toast.success('Password has been changed', {
+                transition: Zoom,
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             props.onHide();
         } catch (error) {
             if (error instanceof yup.ValidationError) {
-                alert(error.message);
+                toast.warn(error.message, {
+                    transition: Zoom,
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             } else {
                 console.log(error);
             }
@@ -72,6 +94,7 @@ function ChangePasswordModal(props) {
                     <Button type="submit" >SAVE PASSWORD</Button>
                 </Modal.Footer>
             </form>
+            <ToastContainer />
         </Modal>
     );
 }

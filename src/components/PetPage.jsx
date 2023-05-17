@@ -4,6 +4,7 @@ import "../CSS/petPage.css";
 // import { PetContextInstance } from '../context/PetContext'
 import { UserContextInstance } from '../context/UserContext'
 import axios from 'axios';
+import "../CSS/petPage.css"
 
 
 function PetPage() {
@@ -51,31 +52,37 @@ function PetPage() {
 
     return (
         <div className='PetPage'>
-            <h1>{pet.name}</h1>
-            <img src={pet.picture} alt={pet.name} />
-            <p>Adoption Status: {pet.adoption_status}</p>
-            <p>Breed: {pet.breed}</p>
-            <p>Height: {pet.height} sm</p>
-            <p>Weight: {pet.weight} kg</p>
-            <p>Color: {pet.color}</p>
-            {pet.bio && <p>Bio: {pet.bio}</p>}
-            <p>Hypoallergenic: {pet.hypoallergenic ? 'Yes' : 'No'}</p>
-            {pet.dietary_restrictions && <p>Dietary Restrictions: {pet.dietary_restrictions}</p>}
+            <div className="pet-about">
+                <div className="pet-about-image-name">
+                    <h1>{pet.name?.toUpperCase()}</h1>
+                    <img src={pet.picture} alt={pet.name} />
+                </div>
+                <div className="pet-about-info">
+                    <p><span>Adoption Status:</span>{pet.adoption_status}</p>
+                    <p><span>Breed:</span>{pet.breed}</p>
+                    <p><span>Height:</span>{pet.height} sm</p>
+                    <p><span>Weight:</span>{pet.weight} kg</p>
+                    <p><span>Color:</span>{pet.color}</p>
+                    {pet.bio && <p><span>Bio:</span>{pet.bio}</p>}
+                    <p><span>Hypoallergenic:</span>{pet.hypoallergenic ? 'Yes' : 'No'}</p>
+                    {pet.dietary_restrictions && <p className=''><span>Dietary Restrictions:</span><br/>{pet.dietary_restrictions}</p>}
+                </div>
+            </div>
+            <div className="pet-buttons">
+                {pet.adoption_status === 'Fostered' && buttons.adopt === true && <button onClick={handleAdopt}>ADOPT</button>}
 
-            {pet.adoption_status === 'Fostered' && buttons.adopt === true && <button onClick={handleAdopt}>Adopt</button>}
-
-            {(pet.owner_id === userId && (pet.adoption_status === 'Fostered' || pet.adoption_status === 'Adopted')) && buttons.return === true && (
-                <button onClick={handleReturn}>Return to Adoption Center</button>
-            )}
+                {(pet.owner_id === userId && (pet.adoption_status === 'Fostered' || pet.adoption_status === 'Adopted')) && buttons.return === true && (
+                    <button onClick={handleReturn}>RETURN TO ADOPTION CENTER</button>
+                )}
 
 
-            {!pet.owner_id && pet.adoption_status === 'Available' && buttons.foster === true && buttons.adopt === true && (
-                <>
-                    <button onClick={handleAdopt}>Adopt</button>
-                    <button onClick={handleFoster}>Foster</button>
-                </>
-            )}
-
+                {!pet.owner_id && pet.adoption_status === 'Available' && buttons.foster === true && buttons.adopt === true && (
+                    <>
+                        <button onClick={handleAdopt}>ADOPT</button>
+                        <button onClick={handleFoster}>FOSTER</button>
+                    </>
+                )}
+            </div>
         </div>
     );
 }

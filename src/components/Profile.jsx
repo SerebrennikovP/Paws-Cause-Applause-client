@@ -8,6 +8,8 @@ import 'react-phone-input-2/lib/style.css';
 import * as yup from 'yup'
 import axios from 'axios';
 import ChangePasswordModal from '../modal/ChangePasswordModal'
+import { ToastContainer, toast, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Profile = () => {
   const navigate = useNavigate()
@@ -60,13 +62,33 @@ const Profile = () => {
 
         const response = await axios.put(`http://localhost:8080/user/changeUser/${token}`, updatedUserObj, { headers: { Authorization: `Bearer ${token}` } });
 
-        alert('Changes saved');
+        toast.success('Changes saved', {
+          transition: Zoom,
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+      });
 
         setIsEditing(!isEditing)
 
       } catch (error) {
         if (error instanceof yup.ValidationError) {
-          alert(error.message);
+          toast.warn(error.message, {
+            transition: Zoom,
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
         } else {
           console.log(error);
         }
@@ -77,31 +99,32 @@ const Profile = () => {
   return (token && name &&
     <>
       <form onSubmit={handleChangeUser}>
-        <div className="mb-3 container userName-Container">
+        <div className="mb-3 profile-Container">
 
-          <label htmlFor="emailInput" className="form-label">Email</label>
+          <label htmlFor="emailInput" className="form-label">EMAIL</label>
           <input type="email" name="email" value={inputs.email} onChange={handleInputChange} className={`form-control shadow-none ${isEditing ? 'editingProfile' : ''}`} id="emailInput" readOnly={isEditing} />
 
-          <label htmlFor="nameInput" className="form-label">Name</label>
+          <label htmlFor="nameInput" className="form-label">NAME</label>
           <input type="text" name="name" value={inputs.name} onChange={handleInputChange} className={`form-control shadow-none ${isEditing ? 'editingProfile' : ''}`} id="nameInput" readOnly={isEditing} />
 
-          <label htmlFor="lastnameInput" className="form-label">Lastname</label>
+          <label htmlFor="lastnameInput" className="form-label">LASTNAME</label>
           <input type="text" name="lastname" value={inputs.lastname} onChange={handleInputChange} className={`form-control shadow-none ${isEditing ? 'editingProfile' : ''}`} id="lastnameInput" readOnly={isEditing} />
 
-          <label htmlFor="phoneInput" className="form-label" >Phone</label>
+          <label htmlFor="phoneInput" className="form-label" >PHONE</label>
           <div className={`phone-input-wrapper ${isEditing ? 'editingProfile' : ''}`}>
             <PhoneInput country="il" id="phoneInput" value={inputs.phone} onChange={handlePhoneChange} inputProps={{ readOnly: isEditing }} disabled={isEditing} />
           </div>
 
-          <label htmlFor="bioInput" className="form-label">Bio</label>
+          <label htmlFor="bioInput" className="form-label">BIO</label>
           <textarea type="textarea" name="bio" value={inputs.bio} onChange={handleInputChange} className={`form-control shadow-none ${isEditing ? 'editingProfile' : ''}`} id="bioInput" readOnly={isEditing} />
           <br></br>
 
-          <button className="btn btn-danger" disabled={!isEditing} onClick={() => setIsEditing(!isEditing)} >Edit profile</button>
-          <button className="btn btn-primary" disabled={isEditing} type="submit" >Save changes</button>
+          <button className="btn btn-danger" disabled={!isEditing} onClick={() => setIsEditing(!isEditing)} >EDIT PROFILE</button>
+          <button className="btn btn-primary" disabled={isEditing} type="submit" >SAVE CHANGES</button>
+          <button className="btn password" type="button" onClick={() => setIsChangePassword(true)} >CHANGE PASSWORD</button>
         </div>
+        <ToastContainer />
       </form>
-      <button className="btn btn-info" onClick={() => setIsChangePassword(true)} >Change password</button>
       <ChangePasswordModal
         show={isChangePassword}
         onHide={() => setIsChangePassword(false)}

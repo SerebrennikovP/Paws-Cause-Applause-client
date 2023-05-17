@@ -1,0 +1,22 @@
+.header-my-pets-page{
+
+}
+.header-my-pets-page .btn{
+    padding:1rem;
+    width:250px;
+    font-weight: 900;
+    font-size: 1rem;
+    border-radius: 0;
+    border:0;
+    font-family: "Unbounded";
+    font-weight: 900;
+}
+.btn-favorite{
+    color:#005fff;
+    background-color: #ffff00;
+}
+
+.btn-my-pets{
+    color:#005fff;
+    background-color: #ffbdff;
+}

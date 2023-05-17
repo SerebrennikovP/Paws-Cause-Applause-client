@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { UserContextInstance } from '../context/UserContext'
 import "../CSS/modals.css"
+import { ToastContainer, toast, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function LoginModal(props) {
@@ -27,7 +29,17 @@ function LoginModal(props) {
             props.onHide();
         } catch (error) {
             if (error.response?.status === 401)
-                alert('The email address or password is incorrect')
+                toast.warn('The email address or password is incorrect', {
+                    transition: Zoom,
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             else
                 console.log(error);
         }
@@ -59,6 +71,7 @@ function LoginModal(props) {
                     <Button type="submit">LET'S GO!</Button>
                 </Modal.Footer>
             </form>
+            <ToastContainer />
         </Modal>
     );
 }

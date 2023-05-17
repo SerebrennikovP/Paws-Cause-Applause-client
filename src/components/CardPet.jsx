@@ -1,4 +1,4 @@
-import { useState,useContext } from 'react';
+import { useState, useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -12,10 +12,12 @@ import { useNavigate } from 'react-router-dom'
 import { routes } from "../constants"
 import "../CSS/cardPet.css"
 import { UserContextInstance } from '../context/UserContext'
+import { PetContextInstance } from '../context/PetContext'
 
 
 export default function CardPet({ pet }) {
     const { token, setModalSignUpShow } = useContext(UserContextInstance)
+    const { handleClipboard,isLoadingCards, setIsLoadingCards } = useContext(PetContextInstance)
     const navigate = useNavigate()
 
     async function handleClick() {
@@ -24,19 +26,16 @@ export default function CardPet({ pet }) {
 
     const [favorited, setFavorited] = useState(false)
 
-    const handleFavorite = () => {
-        if (!token) setModalSignUpShow(true)
-        setFavorited(!favorited)
-    };
 
-    const handleClipboard = () => {
-        navigator.clipboard.writeText(`http://localhost:3000/PetPage/${pet.pet_id}`)
-        alert('Link copied')
+    const handleFavorite = () => {
+        token ? setFavorited(!favorited) : setModalSignUpShow(true)
+
     };
 
     return (
         <Card sx={{
-            height: 400, width: 300, mx: 2, my: 2,color: '#f9eee2', boxShadow: '0 8px 16px rgba(0, 0, 0, 0.7)', borderRadius: '12px', background: '#005fff'}}>
+            height: 400, width: 300, mx: 2, my: 2, color: '#f9eee2', boxShadow: '0 8px 16px rgba(0, 0, 0, 0.7)', borderRadius: '12px', background: '#005fff', opacity: isLoadingCards ? '40%' : '100%'
+        }}>
             <CardHeader
                 title={pet.name?.toUpperCase()}
                 subheader={pet.adoption_status}
@@ -58,10 +57,11 @@ export default function CardPet({ pet }) {
                 <IconButton aria-label="add to favorites" onClick={handleFavorite}>
                     {favorited ? <FavoriteIcon color="error" /> : <FavoriteIcon />}
                 </IconButton>
-                <IconButton aria-label="share" onClick={handleClipboard}>
+                <IconButton aria-label="share" onClick={() => handleClipboard(pet.pet_id)}>
                     <ShareIcon />
                 </IconButton>
             </CardActions>
+
         </Card>
     );
 }

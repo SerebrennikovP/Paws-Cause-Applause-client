@@ -1,3 +1,82 @@
-.PetPage img{
-    width:200px;
+.PetPage img {
+  width: 300px;
+}
+.PetPage {
+  margin: 2rem 4rem;
+  padding:2rem;
+  color: #f9eee2;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  background: #005fff;
+  display: flex;
+  flex-direction: row;
+}
+
+.pet-about{
+    display:flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    flex:1;
+    margin-right: 1rem;
+}
+.pet-about p{
+margin-top: 1rem;
+margin-bottom: 0;
+}
+
+
+.pet-about h1{
+    font-family: "Unbounded";
+    font-weight: 900;
+    color:#ffbdff;
+}
+
+.pet-buttons{
+    width:400px;
+    display:flex;
+    flex-direction: column;
+    font-family: "Unbounded";
+}
+.pet-buttons *{
+    padding:1rem 0;
+    font-weight: 900;
+    font-size: 1rem;
+    color:#005fff;
+    margin-bottom: 1rem;
+    background-color: #ffff00;
+}
+
+.pet-buttons *:hover{
+    font-size: 1.5rem;
+}
+
+.pet-about-info{
+    margin-left: 1rem;
+    padding:2rem;
+    color:#f9eee2;
+}
+
+.pet-about-info>:first-child{
+margin-top: 0;
+}
+
+.pet-about-info span{
+    color:#ffbdff;
+    font-family: "Unbounded";
+    font-weight: 900;
+    margin-right: 0.7rem;
+}
+
+.btn.password{
+    padding:1rem 0;
+    font-weight: 900;
+    font-size: 1rem;
+    color:#f9eee2;
+    margin-bottom: 1rem;
+    background-color: #8b4100;
+    width:100%;
+}
+
+.btn.password:hover{
+    color:#ffbdff;
 }

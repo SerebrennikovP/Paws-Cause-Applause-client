@@ -1,13 +1,14 @@
 .search-page {
   padding: 3rem;
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  grid-column-gap: 20px;
+  display: flex;
+  flex-direction: row;
 }
 
 .searchBar {
   display: flex;
   flex-direction: column;
+  position: fixed;
+  width:230px;
 }
 
 .searchBar > * {
@@ -17,9 +18,33 @@
 .filtred-pets {
   display: flex;
   flex-wrap: wrap;
-  justify-content:space-around;
+  justify-content: space-around;
+  margin-bottom: 2rem;
 }
 
 .searchBar > p {
   margin-bottom: 5px;
+}
+
+.zero-pets {
+  font-family: "Unbounded";
+  font-weight: 900;
+  color: #8b4100;
+  justify-content: center;
+  font-size: 3rem;
+}
+
+.MuiTablePagination-toolbar *{
+  font-family: "Quicksand", sans-serif!important;
+  margin:0;
+  font-size: 1rem!important;
+}
+
+.founded-pets{
+  margin-left: 260px;;
+}
+
+.MuiTablePagination-root {
+  display: flex;
+  justify-content: flex-start;
 }

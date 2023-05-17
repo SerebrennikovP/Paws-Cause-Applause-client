@@ -6,8 +6,10 @@ import 'react-phone-input-2/lib/style.css';
 import { UserContextInstance } from '../context/UserContext'
 import axios from 'axios';
 import * as yup from 'yup'
+import { ToastContainer, toast, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function SignUpModal({onClickLogin, ...props}) {
+function SignUpModal({ onClickLogin, ...props }) {
     const { setToken } = useContext(UserContextInstance)
 
     const signUpSchema = yup.object().shape({
@@ -46,7 +48,17 @@ function SignUpModal({onClickLogin, ...props}) {
 
             const response = await axios.post('http://localhost:8080/user/signUp', postData);
 
-            alert('User added');
+            toast.success('User added', {
+                transition: Zoom,
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
 
             setToken(response.data.token)
 
@@ -56,9 +68,29 @@ function SignUpModal({onClickLogin, ...props}) {
             props.onHide();
         } catch (error) {
             if (error instanceof yup.ValidationError) {
-                alert(error.message);
+                toast.warn(error.message, {
+                    transition: Zoom,
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             } else if (error.response?.status === 409) {
-                alert('User with this email already exists');
+                toast.warn('User with this email already exists', {
+                    transition: Zoom,
+                    position: "top-center",
+                    autoClose: 3000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
             } else {
                 console.log(error);
             }
@@ -104,6 +136,7 @@ function SignUpModal({onClickLogin, ...props}) {
                     <div className="already-have-account">Already have an account?<span onClick={handleAlreadyHave}>LOGIN</span></div>
                 </Modal.Footer>
             </form>
+            <ToastContainer />
         </Modal>
     );
 }
