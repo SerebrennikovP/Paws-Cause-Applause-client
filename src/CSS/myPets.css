@@ -1,22 +1,32 @@
-.header-my-pets-page{
-
-}
-.header-my-pets-page .btn{
-    padding:1rem;
-    width:250px;
-    font-weight: 900;
-    font-size: 1rem;
-    border-radius: 0;
-    border:0;
-    font-family: "Unbounded";
-    font-weight: 900;
-}
-.btn-favorite{
-    color:#005fff;
-    background-color: #ffff00;
+.header-my-pets-page {
+  text-align: center;
 }
 
-.btn-my-pets{
-    color:#005fff;
-    background-color: #ffbdff;
+.header-my-pets-page .btn {
+  padding: 1rem;
+  width: 250px;
+  font-weight: 900;
+  font-size: 1rem;
+  border-radius: 0;
+  border: 0;
+  font-family: "Unbounded";
+  font-weight: 900;
+}
+.btn-favorite:disabled,
+.btn-favorite:hover {
+  color: #005fff;
+  background-color: #ffff00;
+}
+
+.btn-my-pets:disabled,
+.btn-my-pets:hover {
+  color: #005fff;
+  background-color: #ffbdff;
+}
+
+.my-pets {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 2rem;
 }

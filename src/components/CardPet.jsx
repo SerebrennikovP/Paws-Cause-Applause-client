@@ -21,7 +21,7 @@ export default function CardPet({ pet }) {
     const navigate = useNavigate()
 
     async function handleClick() {
-        navigate(routes.petPage.replace(':pet_id', pet.pet_id))
+        navigate(routes.petPage.replace(':pet_id', pet._id))
     }
 
     const [favorited, setFavorited] = useState(false)

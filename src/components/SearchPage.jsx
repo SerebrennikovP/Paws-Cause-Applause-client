@@ -176,7 +176,7 @@ function SearchPage({ type }) {
         {filtredPets &&
           <div className="filtred-pets">
             {filtredPets.map((pet) => (
-              <CardPet key={pet.pet_id} pet={pet} />
+              <CardPet key={pet._id} pet={pet} />
             )).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)}
           </div>}
         <TablePagination

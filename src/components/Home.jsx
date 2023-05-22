@@ -137,7 +137,7 @@ const Home = () => {
           {randomPets
             .slice(0, Math.floor(window.innerWidth / 338))
             .map((pet) => (
-              <CardPet key={pet.pet_id} pet={pet} />
+              <CardPet key={pet._id} pet={pet} />
             ))}
         </div>
         <ToastContainer />

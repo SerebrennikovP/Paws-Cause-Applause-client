@@ -65,7 +65,7 @@ function PetPage() {
                     <p><span>Color:</span>{pet.color}</p>
                     {pet.bio && <p><span>Bio:</span>{pet.bio}</p>}
                     <p><span>Hypoallergenic:</span>{pet.hypoallergenic ? 'Yes' : 'No'}</p>
-                    {pet.dietary_restrictions && <p className=''><span>Dietary Restrictions:</span><br/>{pet.dietary_restrictions}</p>}
+                    {pet.dietary_restrictions && <p className=''><span>Dietary Restrictions:</span><br/>{pet.dietary_restrictions.join(', ')}</p>}
                 </div>
             </div>
             <div className="pet-buttons">

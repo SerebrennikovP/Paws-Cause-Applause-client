@@ -32,7 +32,7 @@ const UserContext = ({ children }) => {
 
 
     return (
-        <UserContextInstance.Provider value={{ email: userObj.email, name: userObj.name, lastname: userObj.lastname, phone: userObj.phone, token, setToken, userObj, setUserObj, bio: userObj.bio, userId: userObj.id, SignOut,modalSignUpShow, setModalSignUpShow }}>
+        <UserContextInstance.Provider value={{ email: userObj.email, name: userObj.name, lastname: userObj.lastname, phone: userObj.phone, token, setToken, userObj, setUserObj, bio: userObj.bio, userId: userObj._id, SignOut,modalSignUpShow, setModalSignUpShow }}>
             {children}
         </UserContextInstance.Provider>
     )
