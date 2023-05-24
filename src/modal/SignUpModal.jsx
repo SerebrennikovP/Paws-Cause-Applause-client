@@ -6,7 +6,7 @@ import 'react-phone-input-2/lib/style.css';
 import { UserContextInstance } from '../context/UserContext'
 import axios from 'axios';
 import * as yup from 'yup'
-import { ToastContainer, toast, Zoom } from 'react-toastify';
+import { toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function SignUpModal({ onClickLogin, ...props }) {
@@ -136,7 +136,6 @@ function SignUpModal({ onClickLogin, ...props }) {
                     <div className="already-have-account">Already have an account?<span onClick={handleAlreadyHave}>LOGIN</span></div>
                 </Modal.Footer>
             </form>
-            <ToastContainer />
         </Modal>
     );
 }

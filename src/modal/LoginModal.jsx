@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { UserContextInstance } from '../context/UserContext'
 import "../CSS/modals.css"
-import { ToastContainer, toast, Zoom } from 'react-toastify';
+import { toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -71,7 +71,6 @@ function LoginModal(props) {
                     <Button type="submit">LET'S GO!</Button>
                 </Modal.Footer>
             </form>
-            <ToastContainer />
         </Modal>
     );
 }

@@ -9,7 +9,7 @@ import { ReactComponent as UserSVG } from '../images/user-solid.svg'
 
 const HeaderProfile = () => {
 
-    const { token, name, lastname, setToken, SignOut, modalSignUpShow, setModalSignUpShow } = useContext(UserContextInstance)
+    const { token, name, lastname, SignOut, modalSignUpShow, setModalSignUpShow, isAdmin } = useContext(UserContextInstance)
     const [modalLoginShow, setModalLoginShow] = useState(false)
 
     return (
@@ -21,6 +21,13 @@ const HeaderProfile = () => {
                     <div className="dropdown-content LoggedIn">
                         <NavLink to={routes.profile}>PROFILE SETTINGS</NavLink>
                         <NavLink to={routes.myPets}>MY PETS</NavLink>
+
+                        {isAdmin &&
+                            <div className='admin-header p-0'>
+                                <NavLink to={routes.addPet}>ADD PETS</NavLink>
+                                <NavLink to={routes.dashboard}>DASHBOARD</NavLink>
+                            </div>}
+
                         <div onClick={SignOut}>SIGN OUT</div>
                     </div>
                 </div>

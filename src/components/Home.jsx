@@ -13,14 +13,13 @@ import happyCat from "../images/happy-cat.png";
 import sadDog from "../images/sad-dog.png";
 import happyDog from "../images/happy-dog.png";
 import { UserContextInstance } from '../context/UserContext'
-import { ToastContainer } from 'react-toastify';
 
 const Home = () => {
   const navigate = useNavigate();
   const [randomPets, setRandomPets] = useState([]);
   const [updater, setUpdater] = useState(0);
   const [changeBar, setChangeBar] = useState(0);
-  const [active, setActive] = useState(true);
+  const [isIn, setIsIn] = useState(true);
   const [intervalId, setIntervalId] = useState(null);
   const [isVisibleBar, setIsVisibleBar] = useState(true);
   const [isHoveringCat, setIsHoveringCat] = useState(false);
@@ -30,14 +29,14 @@ const Home = () => {
   useEffect(() => {
     const getRandomPets = async () => {
       try {
-        setActive(false);
         const response = await axios.get("http://localhost:8080/pet/getRandom");
         setRandomPets(response.data);
+        setIsIn(false);
         setTimeout(() => {
           changeBar !== 3 ? setChangeBar((prev) => prev + 1) : setChangeBar(0);
         }, 1000);
         setTimeout(() => {
-          setActive(true);
+          setIsIn(true);
         }, 6300);
       } catch (error) {
         console.error(error);
@@ -59,7 +58,7 @@ const Home = () => {
     if (!modalSignUpShow) {
       clearInterval(intervalId);
       setIsVisibleBar(false)
-      setActive(true)
+      setIsIn(true)
     };
   };
 
@@ -71,7 +70,7 @@ const Home = () => {
         }, 7000)
       );
       setIsVisibleBar(true)
-      setActive(true)
+      setIsIn(true)
     };
   };
 
@@ -140,9 +139,8 @@ const Home = () => {
               <CardPet key={pet._id} pet={pet} />
             ))}
         </div>
-        <ToastContainer />
         {isVisibleBar && (
-          <div className={`overlay-layer ${active ? "in" : "out"}`}>
+          <div className={`overlay-layer ${isIn ? "in" : "out"}`}>
             <img
               src={
                 changeBar === 0

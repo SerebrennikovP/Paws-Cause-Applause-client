@@ -62,6 +62,12 @@
 .dropdown-content *:hover {
   color: #8b4100;
   background-color: #ffbdff;
+  cursor: pointer;
+}
+
+.admin-header *:hover{
+  color: #ffff00;
+  background-color: #005fff;
 }
 
 .HeaderPage {

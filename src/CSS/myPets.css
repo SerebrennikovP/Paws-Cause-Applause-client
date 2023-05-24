@@ -24,9 +24,30 @@
   background-color: #ffbdff;
 }
 
-.my-pets {
+.my-pets,
+.favorite-pets {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   margin-bottom: 2rem;
+}
+
+.zero-my-pets {
+  font-family: "Unbounded";
+  flex-direction: column;
+  font-weight: 900;
+  color: #8b4100;
+  font-size: 3rem;
+  text-align: center;
+  margin: 3rem;
+}
+
+.zero-my-pets div {
+  color: #005fff;
+  text-decoration: underline;
+}
+
+.zero-my-pets div:hover {
+  cursor: pointer;
+  font-size: 3.5rem;
 }

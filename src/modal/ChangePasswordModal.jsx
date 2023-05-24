@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import { UserContextInstance } from '../context/UserContext'
 import axios from 'axios';
 import * as yup from 'yup';
-import { ToastContainer, toast, Zoom } from 'react-toastify';
+import { toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function ChangePasswordModal(props) {
@@ -94,7 +94,6 @@ function ChangePasswordModal(props) {
                     <Button type="submit" >SAVE PASSWORD</Button>
                 </Modal.Footer>
             </form>
-            <ToastContainer />
         </Modal>
     );
 }

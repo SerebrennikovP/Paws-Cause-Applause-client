@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -16,21 +16,18 @@ import { PetContextInstance } from '../context/PetContext'
 
 
 export default function CardPet({ pet }) {
-    const { token, setModalSignUpShow } = useContext(UserContextInstance)
-    const { handleClipboard,isLoadingCards, setIsLoadingCards } = useContext(PetContextInstance)
+    const { userObj } = useContext(UserContextInstance)
+    const { handleClipboard, isLoadingCards, handleFavorite } = useContext(PetContextInstance)
+    const [favorited, setFavorited] = useState(false)
     const navigate = useNavigate()
 
     async function handleClick() {
         navigate(routes.petPage.replace(':pet_id', pet._id))
     }
 
-    const [favorited, setFavorited] = useState(false)
-
-
-    const handleFavorite = () => {
-        token ? setFavorited(!favorited) : setModalSignUpShow(true)
-
-    };
+    useEffect(() => {
+        userObj?.favorite?.find(id => id == pet._id) && setFavorited(true)
+    }, [])
 
     return (
         <Card sx={{
@@ -54,10 +51,10 @@ export default function CardPet({ pet }) {
                 <Typography paragraph sx={{ mx: 0, my: 0 }}>{pet.weight} Kg</Typography>
             </CardContent>
             <CardActions disableSpacing sx={{ py: 0, height: 50 }}>
-                <IconButton aria-label="add to favorites" onClick={handleFavorite}>
+                <IconButton aria-label="add to favorites" onClick={() => handleFavorite(pet._id, favorited, setFavorited)}>
                     {favorited ? <FavoriteIcon color="error" /> : <FavoriteIcon />}
                 </IconButton>
-                <IconButton aria-label="share" onClick={() => handleClipboard(pet.pet_id)}>
+                <IconButton aria-label="share" onClick={() => handleClipboard(pet._id)}>
                     <ShareIcon />
                 </IconButton>
             </CardActions>

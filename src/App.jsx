@@ -11,6 +11,9 @@ import SearchPage from './components/SearchPage';
 import LoadingPage from './components/Loading';
 import PetPage from './components/PetPage';
 import PetContext from './context/PetContext';
+import { ToastContainer } from 'react-toastify';
+import AddPet from './components/AddPet';
+import Dashboard from './components/Dashboard';
 
 const App = () => {
     const [loading, setLoading] = useState(true);
@@ -25,6 +28,7 @@ const App = () => {
 
     return (
         <UserContext>
+            <ToastContainer />
             <PetContext>
                 {loading ? <LoadingPage /> :
                     <div className='App'>
@@ -36,6 +40,8 @@ const App = () => {
                             <Route path={routes.searchPageCats} element={<SearchPage type="Cat" />} />
                             <Route path={routes.searchPageDogs} element={<SearchPage type="Dog" />} />
                             <Route path={routes.petPage} element={<PetPage />} />
+                            <Route path={routes.dashboard} element={<Dashboard />} />
+                            <Route path={routes.addPet} element={<AddPet />} />
                         </Routes>
                     </div>}
             </PetContext>

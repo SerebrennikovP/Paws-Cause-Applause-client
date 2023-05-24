@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, createContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { routes } from "../constants"
 
 
 const UserContextInstance = createContext()
@@ -8,10 +10,12 @@ const UserContext = ({ children }) => {
     const [userObj, setUserObj] = useState({})
     const [token, setToken] = useState(localStorage.getItem('token') || '')
     const [modalSignUpShow, setModalSignUpShow] = useState(false)
+    const navigate = useNavigate()
 
     function SignOut() {
         localStorage.clear()
         setToken('')
+        navigate(routes.home)
     }
 
     useEffect(() => {
@@ -32,7 +36,7 @@ const UserContext = ({ children }) => {
 
 
     return (
-        <UserContextInstance.Provider value={{ email: userObj.email, name: userObj.name, lastname: userObj.lastname, phone: userObj.phone, token, setToken, userObj, setUserObj, bio: userObj.bio, userId: userObj._id, SignOut,modalSignUpShow, setModalSignUpShow }}>
+        <UserContextInstance.Provider value={{ email: userObj.email, name: userObj.name, lastname: userObj.lastname, phone: userObj.phone, token, setToken, userObj, setUserObj, bio: userObj.bio, userId: userObj._id, SignOut, modalSignUpShow, setModalSignUpShow, isAdmin: userObj.isAdmin }}>
             {children}
         </UserContextInstance.Provider>
     )

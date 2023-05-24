@@ -1,61 +1,81 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useParams } from "react-router-dom";
 import "../CSS/petPage.css";
-// import { PetContextInstance } from '../context/PetContext'
+import { PetContextInstance } from '../context/PetContext'
 import { UserContextInstance } from '../context/UserContext'
 import axios from 'axios';
 import "../CSS/petPage.css"
+import IconButton from '@mui/material/IconButton';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 
 function PetPage() {
 
-    const { userId, token, setModalSignUpShow } = useContext(UserContextInstance)
+    const { userId, token, setModalSignUpShow, userObj } = useContext(UserContextInstance)
+    const { setIsLoadingCards, isLoadingCards, handleFavorite } = useContext(PetContextInstance)
     const [pet, setPet] = useState({})
+    const [favoritedPetPage, setFavoritedPetPage] = useState(false)
     const [buttons, setButtons] = useState({ "return": true, "foster": true, "adopt": true })
 
     const { pet_id } = useParams()
 
     useEffect(() => {
         async function getPet() {
+            setIsLoadingCards(true)
             const data = await axios.get(`http://localhost:8080/pet/petpage/${pet_id}`)
             setPet(data.data)
+            setIsLoadingCards(false)
         }
         getPet()
     }, [buttons])
 
+    useEffect(() => {
+        userObj?.favorite?.find(id => id == pet_id) && setFavoritedPetPage(true)
+    }, [])
+
     async function handleAdopt() {
         if (!token) setModalSignUpShow(true)
         else {
+            setIsLoadingCards(true)
             pet.owner_id = userId;
             const response = await axios.put(`http://localhost:8080/pet/changeStatus/${pet_id}`, { "handler": "adopt", "owner_id": userId }, { headers: { Authorization: `Bearer ${token}` } })
             setButtons({ "return": true, "foster": false, "adopt": false })
+            setIsLoadingCards(false)
         }
     }
 
     async function handleFoster() {
         if (!token) setModalSignUpShow(true)
         else {
+            setIsLoadingCards(true)
             pet.owner_id = userId;
             const response = await axios.put(`http://localhost:8080/pet/changeStatus/${pet_id}`, { "handler": "foster", "owner_id": userId }, { headers: { Authorization: `Bearer ${token}` } });
             setButtons({ "return": true, "foster": false, "adopt": true })
+            setIsLoadingCards(false)
         }
     }
-
+console.log(userObj)
     async function handleReturn() {
         if (!token) setModalSignUpShow(true)
         else {
+            setIsLoadingCards(true)
             pet.owner_id = ''
             const response = await axios.put(`http://localhost:8080/pet/changeStatus/${pet_id}`, { "handler": "return", "owner_id": "" }, { headers: { Authorization: `Bearer ${token}` } });
             setButtons({ "return": false, "foster": true, "adopt": true })
+            setIsLoadingCards(false)
         }
     }
 
     return (
-        <div className='PetPage'>
+        <div className='PetPage' style={{ opacity: isLoadingCards ? '40%' : '100%' }}>
             <div className="pet-about">
                 <div className="pet-about-image-name">
                     <h1>{pet.name?.toUpperCase()}</h1>
-                    <img src={pet.picture} alt={pet.name} />
+                    <div className="image-wrapper-pet-page">
+                        <img src={pet.picture} alt={pet.name} />
+                        <IconButton aria-label="add to favorites" onClick={() => handleFavorite(pet_id, favoritedPetPage, setFavoritedPetPage)}>
+                            {favoritedPetPage ? <FavoriteIcon color="error" /> : <FavoriteIcon />}
+                        </IconButton></div>
                 </div>
                 <div className="pet-about-info">
                     <p><span>Adoption Status:</span>{pet.adoption_status}</p>
@@ -65,7 +85,7 @@ function PetPage() {
                     <p><span>Color:</span>{pet.color}</p>
                     {pet.bio && <p><span>Bio:</span>{pet.bio}</p>}
                     <p><span>Hypoallergenic:</span>{pet.hypoallergenic ? 'Yes' : 'No'}</p>
-                    {pet.dietary_restrictions && <p className=''><span>Dietary Restrictions:</span><br/>{pet.dietary_restrictions.join(', ')}</p>}
+                    {pet.dietary_restrictions && <p className=''><span>Dietary Restrictions:</span><br />{pet.dietary_restrictions.join(', ')}</p>}
                 </div>
             </div>
             <div className="pet-buttons">

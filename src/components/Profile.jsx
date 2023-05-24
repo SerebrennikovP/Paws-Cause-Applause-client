@@ -8,8 +8,8 @@ import 'react-phone-input-2/lib/style.css';
 import * as yup from 'yup'
 import axios from 'axios';
 import ChangePasswordModal from '../modal/ChangePasswordModal'
-import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { toast, Zoom } from 'react-toastify';
 
 const Profile = () => {
   const navigate = useNavigate()
@@ -123,7 +123,6 @@ const Profile = () => {
           <button className="btn btn-primary" disabled={isEditing} type="submit" >SAVE CHANGES</button>
           <button className="btn password" type="button" onClick={() => setIsChangePassword(true)} >CHANGE PASSWORD</button>
         </div>
-        <ToastContainer />
       </form>
       <ChangePasswordModal
         show={isChangePassword}

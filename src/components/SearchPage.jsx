@@ -7,7 +7,6 @@ import { statusOptions } from "../constants";
 import CardPet from "./CardPet";
 import TablePagination from '@mui/material/TablePagination';
 import { PetContextInstance } from '../context/PetContext'
-import { ToastContainer } from 'react-toastify';
 
 
 function SearchPage({ type }) {
@@ -20,7 +19,7 @@ function SearchPage({ type }) {
   const [weightRange, setWeightRange] = useState([0, type == "Dog" ? 25 : 15]);
   const [searchName, setSearchName] = useState("");
   const [selectedOptionBreed, setSelectedOptionBreed] = useState(null);
-  const [adoptionStatus, setAdoptionstatus] = useState({
+  const [adoptionStatus, setAdoptionStatus] = useState({
     label: "Adoption status",
     value: "All",
   });
@@ -121,7 +120,7 @@ function SearchPage({ type }) {
         />
         <Select
           value={adoptionStatus}
-          onChange={(option) => setAdoptionstatus(option)}
+          onChange={(option) => setAdoptionStatus(option)}
           name="adoptionStatus"
           options={statusOptions}
           className="basic-single"
@@ -190,7 +189,6 @@ function SearchPage({ type }) {
           rowsPerPage={rowsPerPage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
-        <ToastContainer />
       </div>
     </div>
   );
