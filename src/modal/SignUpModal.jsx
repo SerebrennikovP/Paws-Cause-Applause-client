@@ -6,7 +6,8 @@ import 'react-phone-input-2/lib/style.css';
 import { UserContextInstance } from '../context/UserContext'
 import axios from 'axios';
 import * as yup from 'yup'
-import { toast, Zoom } from 'react-toastify';
+import { toast } from 'react-toastify';
+import { toast_config } from '../constants';
 import 'react-toastify/dist/ReactToastify.css';
 
 function SignUpModal({ onClickLogin, ...props }) {
@@ -48,17 +49,7 @@ function SignUpModal({ onClickLogin, ...props }) {
 
             const response = await axios.post('http://localhost:8080/user/signUp', postData);
 
-            toast.success('User added', {
-                transition: Zoom,
-                position: "top-center",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-            });
+            toast.success('User added', toast_config);
 
             setToken(response.data.token)
 
@@ -68,29 +59,9 @@ function SignUpModal({ onClickLogin, ...props }) {
             props.onHide();
         } catch (error) {
             if (error instanceof yup.ValidationError) {
-                toast.warn(error.message, {
-                    transition: Zoom,
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
+                toast.warn(error.message, toast_config);
             } else if (error.response?.status === 409) {
-                toast.warn('User with this email already exists', {
-                    transition: Zoom,
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
+                toast.warn('User with this email already exists', toast_config);
             } else {
                 console.log(error);
             }

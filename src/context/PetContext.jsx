@@ -1,8 +1,9 @@
 import React, { createContext, useState, useContext } from 'react'
-import { toast, Zoom } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import { UserContextInstance } from './UserContext'
+import { toast_config } from '../constants';
 
 const PetContextInstance = createContext()
 
@@ -14,17 +15,7 @@ const PetContext = ({ children }) => {
 
     const handleClipboard = (petID) => {
         navigator.clipboard.writeText(`http://localhost:3000/PetPage/${petID}`)
-        toast.info('Link copied', {
-            transition: Zoom,
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
+        toast.info('Link copied', toast_config);
     };
 
     const [isLoadingCards, setIsLoadingCards] = useState(false)

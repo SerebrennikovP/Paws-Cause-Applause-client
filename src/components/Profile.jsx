@@ -1,7 +1,7 @@
 import '../CSS/profile.css';
 import React, { useContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { routes } from "../constants"
+import { routes, toast_config } from '../constants';
 import { UserContextInstance } from '../context/UserContext'
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
@@ -9,7 +9,7 @@ import * as yup from 'yup'
 import axios from 'axios';
 import ChangePasswordModal from '../modal/ChangePasswordModal'
 import 'react-toastify/dist/ReactToastify.css';
-import { toast, Zoom } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const Profile = () => {
   const navigate = useNavigate()
@@ -62,33 +62,13 @@ const Profile = () => {
 
         const response = await axios.put(`http://localhost:8080/user/changeUser/${token}`, updatedUserObj, { headers: { Authorization: `Bearer ${token}` } });
 
-        toast.success('Changes saved', {
-          transition: Zoom,
-          position: "top-center",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-      });
+        toast.success('Changes saved', toast_config);
 
         setIsEditing(!isEditing)
 
       } catch (error) {
         if (error instanceof yup.ValidationError) {
-          toast.warn(error.message, {
-            transition: Zoom,
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
+          toast.warn(error.message, toast_config);
         } else {
           console.log(error);
         }

@@ -4,7 +4,8 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import { UserContextInstance } from '../context/UserContext'
 import "../CSS/modals.css"
-import { toast, Zoom } from 'react-toastify';
+import { toast } from 'react-toastify';
+import { toast_config } from '../constants';
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -29,17 +30,7 @@ function LoginModal(props) {
             props.onHide();
         } catch (error) {
             if (error.response?.status === 401)
-                toast.warn('The email address or password is incorrect', {
-                    transition: Zoom,
-                    position: "top-center",
-                    autoClose: 3000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
+                toast.warn('The email address or password is incorrect', toast_config);
             else
                 console.log(error);
         }

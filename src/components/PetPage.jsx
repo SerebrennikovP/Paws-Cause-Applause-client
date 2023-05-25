@@ -16,6 +16,7 @@ function PetPage() {
     const [pet, setPet] = useState({})
     const [favoritedPetPage, setFavoritedPetPage] = useState(false)
     const [buttons, setButtons] = useState({ "return": true, "foster": true, "adopt": true })
+    const [isExist, setIsExist] = useState(true)
 
     const { pet_id } = useParams()
 
@@ -25,6 +26,7 @@ function PetPage() {
             const data = await axios.get(`http://localhost:8080/pet/petpage/${pet_id}`)
             setPet(data.data)
             setIsLoadingCards(false)
+            data.data ? setIsExist(true) : setIsExist(false)
         }
         getPet()
     }, [buttons])
@@ -54,7 +56,7 @@ function PetPage() {
             setIsLoadingCards(false)
         }
     }
-console.log(userObj)
+
     async function handleReturn() {
         if (!token) setModalSignUpShow(true)
         else {
@@ -66,7 +68,7 @@ console.log(userObj)
         }
     }
 
-    return (
+    return (isExist ?
         <div className='PetPage' style={{ opacity: isLoadingCards ? '40%' : '100%' }}>
             <div className="pet-about">
                 <div className="pet-about-image-name">
@@ -85,7 +87,7 @@ console.log(userObj)
                     <p><span>Color:</span>{pet.color}</p>
                     {pet.bio && <p><span>Bio:</span>{pet.bio}</p>}
                     <p><span>Hypoallergenic:</span>{pet.hypoallergenic ? 'Yes' : 'No'}</p>
-                    {pet.dietary_restrictions && <p className=''><span>Dietary Restrictions:</span><br />{pet.dietary_restrictions.join(', ')}</p>}
+                    {pet.dietary_restrictions && pet.dietary_restrictions != "" && <p className=''><span>Dietary Restrictions:</span><br />{pet.dietary_restrictions.join(', ')}</p>}
                 </div>
             </div>
             <div className="pet-buttons">
@@ -104,6 +106,8 @@ console.log(userObj)
                 )}
             </div>
         </div>
+        :
+        <div className="zero-pets text-center mt-4" >PET IS NOT FOUND</div>
     );
 }
 

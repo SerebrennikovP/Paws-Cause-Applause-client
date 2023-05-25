@@ -1,0 +1,68 @@
+.AddPet {
+  margin: 2rem 4rem;
+  /* color: #f9eee2; */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  background: #005fff;
+  display: flex;
+  flex-direction: row;
+}
+.AddPet form {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+}
+.AddPet label {
+  color: #f9eee2;
+}
+.block1,
+.block2 {
+  width: 50%;
+  padding: 3rem;
+}
+
+.buttonAddPet {
+  width: 100%;
+  background-color: #ffff00;
+  color: #005fff;
+  font-family: "Unbounded";
+  font-weight: 900;
+  padding: 10px 0;
+  margin-top: 30px;
+}
+
+.buttonAddPet:hover {
+  width: 100%;
+  background-color: #8b4100;
+  color: #ffff00;
+  font-family: "Unbounded";
+  font-weight: 900;
+}
+
+.form-check {
+  margin-top: 2.5rem;
+}
+
+.form-check-input {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin: 0;
+}
+
+.form-check-label {
+  line-height: 36px;
+  padding-left: 1rem;
+}
+
+.form-check-input:checked {
+  background-color: #8b4100;
+}
+
+.form-check *:hover {
+  cursor: pointer;
+}
+
+textarea {
+  min-height: 112px !important;
+}
