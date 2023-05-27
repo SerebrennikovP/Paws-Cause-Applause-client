@@ -88,7 +88,7 @@ const AddPet = () => {
             }
 
             await addPetSchema.validate({ ...petData, petImage });
-            const res = await axios.post('http://localhost:8080/pet/add', formData, { headers: { Authorization: `Bearer ${token}` } });
+            const res = await axios.post(`${process.env.REACT_APP_SERVER_URL}/pet/add`, formData, { headers: { Authorization: `Bearer ${token}` } });
 
             if (res.data._id) {
                 console.log(res.data)

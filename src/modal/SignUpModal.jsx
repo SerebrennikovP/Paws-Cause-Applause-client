@@ -47,7 +47,7 @@ function SignUpModal({ onClickLogin, ...props }) {
         try {
             await signUpSchema.validate(inputs);
 
-            const response = await axios.post('http://localhost:8080/user/signUp', postData);
+            const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/signUp`, postData);
 
             toast.success('User added', toast_config);
 

@@ -16,7 +16,7 @@ function DashboardPets() {
     useEffect(() => {
         async function getPets() {
             try {
-                const allPets = await axios.get('http://localhost:8080/pet/getAllPets', {
+                const allPets = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pet/getAllPets`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 const modifiedPets = allPets.data.map((user) => {

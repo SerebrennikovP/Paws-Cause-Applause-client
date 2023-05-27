@@ -60,7 +60,7 @@ const Profile = () => {
         }
         setUserObj(updatedUserObj)
 
-        const response = await axios.put(`http://localhost:8080/user/changeUser/${token}`, updatedUserObj, { headers: { Authorization: `Bearer ${token}` } });
+        const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/user/changeUser/${token}`, updatedUserObj, { headers: { Authorization: `Bearer ${token}` } });
 
         toast.success('Changes saved', toast_config);
 

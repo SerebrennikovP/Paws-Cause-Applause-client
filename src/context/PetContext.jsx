@@ -25,7 +25,7 @@ const PetContext = ({ children }) => {
     async function handleFavorite(petId, favorited, setFavorited) {
         if (!token) setModalSignUpShow(true)
         else {
-            const response = await axios.put(`http://localhost:8080/pet/favorite`, { "user_id": userObj._id, "pet_id": petId, "isAdd": !favorited }, { headers: { Authorization: `Bearer ${token}` } });
+            const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/pet/favorite`, { "user_id": userObj._id, "pet_id": petId, "isAdd": !favorited }, { headers: { Authorization: `Bearer ${token}` } });
             favorited ? userObj.favorite = userObj.favorite.filter(el => el !== petId) : userObj.favorite.push(petId)
             setFavorited(!favorited)
             setIsMyPetsPage(isMyPetsPage + 1)

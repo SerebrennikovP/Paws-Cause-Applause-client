@@ -29,7 +29,7 @@ const Home = () => {
   useEffect(() => {
     const getRandomPets = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/pet/getRandom");
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pet/getRandom`);
         setRandomPets(response.data);
         setIsIn(false);
         setTimeout(() => {

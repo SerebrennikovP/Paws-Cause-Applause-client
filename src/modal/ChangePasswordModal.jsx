@@ -38,7 +38,7 @@ function ChangePasswordModal(props) {
                 password: inputs.password
             }
 
-            const response = await axios.put(`http://localhost:8080/user/changeUser/${token}`, updatedUserObj, { headers: { Authorization: `Bearer ${token}` } });
+            const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/user/changeUser/${token}`, updatedUserObj, { headers: { Authorization: `Bearer ${token}` } });
             setInputs({
                 password: '',
                 repassword: '',
