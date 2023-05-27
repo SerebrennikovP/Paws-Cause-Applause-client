@@ -40,7 +40,7 @@ function SearchPage({ type }) {
     const fetchBreeds = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:8080/pet/getBreeds",
+          `${process.env.REACT_APP_SERVER_URL}/pet/getBreeds`,
           { type: type }
         );
         const breeds = response.data.map((breed) => ({
@@ -58,7 +58,7 @@ function SearchPage({ type }) {
   useEffect(() => {
     const firstFetch = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/pet/search", {
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pet/search`, {
           params: {
             type,
             name: searchName,
@@ -81,7 +81,7 @@ function SearchPage({ type }) {
   useEffect(() => {
     setIsLoadingCards(true)
     debounceParams.current = setTimeout(async () => {
-      const response = await axios.get("http://localhost:8080/pet/search", {
+      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pet/search`, {
         params: {
           type,
           name: searchName,

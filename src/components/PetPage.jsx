@@ -24,7 +24,7 @@ function PetPage() {
     useEffect(() => {
         async function getPet() {
             setIsLoadingCards(true)
-            const data = await axios.get(`http://localhost:8080/pet/petpage/${pet_id}`)
+            const data = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pet/petpage/${pet_id}`)
             setPet(data.data)
             setIsLoadingCards(false)
             data.data ? setIsExist(true) : setIsExist(false)
@@ -41,7 +41,7 @@ function PetPage() {
         else {
             setIsLoadingCards(true)
             pet.owner_id = userId;
-            const response = await axios.put(`http://localhost:8080/pet/changeStatus/${pet_id}`, { "handler": "adopt", "owner_id": userId }, { headers: { Authorization: `Bearer ${token}` } })
+            const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/pet/changeStatus/${pet_id}`, { "handler": "adopt", "owner_id": userId }, { headers: { Authorization: `Bearer ${token}` } })
             setButtons({ "return": true, "foster": false, "adopt": false })
             setIsLoadingCards(false)
         }
@@ -52,7 +52,7 @@ function PetPage() {
         else {
             setIsLoadingCards(true)
             pet.owner_id = userId;
-            const response = await axios.put(`http://localhost:8080/pet/changeStatus/${pet_id}`, { "handler": "foster", "owner_id": userId }, { headers: { Authorization: `Bearer ${token}` } });
+            const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/pet/changeStatus/${pet_id}`, { "handler": "foster", "owner_id": userId }, { headers: { Authorization: `Bearer ${token}` } });
             setButtons({ "return": true, "foster": false, "adopt": true })
             setIsLoadingCards(false)
         }
@@ -63,7 +63,7 @@ function PetPage() {
         else {
             setIsLoadingCards(true)
             pet.owner_id = ''
-            const response = await axios.put(`http://localhost:8080/pet/changeStatus/${pet_id}`, { "handler": "return", "owner_id": "" }, { headers: { Authorization: `Bearer ${token}` } });
+            const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/pet/changeStatus/${pet_id}`, { "handler": "return", "owner_id": "" }, { headers: { Authorization: `Bearer ${token}` } });
             setButtons({ "return": false, "foster": true, "adopt": true })
             setIsLoadingCards(false)
         }

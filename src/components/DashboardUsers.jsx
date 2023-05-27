@@ -15,7 +15,7 @@ function DashboardUsers() {
     useEffect(() => {
         async function getUsers() {
             try {
-                const allUsers = await axios.get('http://localhost:8080/user/getAllUsers', {
+                const allUsers = await axios.get(`${process.env.REACT_APP_SERVER_URL}/user/getAllUsers`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 const modifiedUsers = allUsers.data.map((user) => {
@@ -36,7 +36,7 @@ function DashboardUsers() {
                 if (user.id === id && !IDs_creators.includes(user.id)) {
 
                     const updatedUser = { ...user, isAdmin: value }
-                    const response = await axios.put(`http://localhost:8080/user/changeAdmin`, { "id": user.id, "isAdmin": value }, { headers: { Authorization: `Bearer ${token}` } });
+                    const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/user/changeAdmin`, { "id": user.id, "isAdmin": value }, { headers: { Authorization: `Bearer ${token}` } });
                     response && toast.success('Admin is changed', toast_config);
                     return updatedUser;
                 }

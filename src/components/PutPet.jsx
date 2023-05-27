@@ -26,7 +26,7 @@ const PutPet = () => {
     useEffect(() => {
         async function getPet() {
             setIsLoadingCards(true)
-            const data = await axios.get(`http://localhost:8080/pet/petpage/${pet_id}`)
+            const data = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pet/petpage/${pet_id}`)
             setPet(data.data)
             setIsLoadingCards(false)
         }
@@ -114,7 +114,7 @@ const PutPet = () => {
             }
 
             await putPetSchema.validate({ ...petData, petImage });
-            const res = await axios.put('http://localhost:8080/pet/put', formData, { headers: { Authorization: `Bearer ${token}` } });
+            const res = await axios.put(`${process.env.REACT_APP_SERVER_URL}/pet/put`, formData, { headers: { Authorization: `Bearer ${token}` } });
 
             if (res) {
                 toast.success('Changes saved', toast_config);

@@ -21,7 +21,7 @@ const UserContext = ({ children }) => {
     useEffect(() => {
         async function getUser() {
             try {
-                const user = await axios.post('http://localhost:8080/user/getUser', { "token": token })
+                const user = await axios.post(`${process.env.REACT_APP_SERVER_URL}/user/getUser`, { "token": token })
                 setUserObj(user.data)
             }
             catch (err) {

@@ -23,7 +23,7 @@ const MyPets = () => {
     const fetchMyPets = async () => {
       try {
         setIsLoadingCards(true)
-        const response = await axios.get(`http://localhost:8080/pet/user/${token}`, { headers: { Authorization: `Bearer ${token}` } });
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/pet/user/${token}`, { headers: { Authorization: `Bearer ${token}` } });
         setMyPets(response.data)
         setIsFirstMount(false)
         setIsLoadingCards(false)
@@ -38,7 +38,7 @@ const MyPets = () => {
     const fetchFavoritePets = async () => {
       try {
         setIsLoadingCards(true)
-        const response = await axios.post(`http://localhost:8080/pet/user/favorite/${token}`, { "favorite": userObj?.favorite }, { headers: { Authorization: `Bearer ${token}` } });
+        const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/pet/user/favorite/${token}`, { "favorite": userObj?.favorite }, { headers: { Authorization: `Bearer ${token}` } });
         setFavoritePets(response.data)
         setIsLoadingCards(false)
       } catch (error) {
