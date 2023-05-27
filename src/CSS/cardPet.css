@@ -1,9 +1,8 @@
-.MuiPaper-root *{
-    font-family: 'Quicksand', sans-serif!important
+.MuiPaper-root * {
+  font-family: "Quicksand", sans-serif !important;
 }
 
 .MuiCardHeader-title {
-    font-family: "Unbounded"!important;
-    font-weight: 400!important
-  }
-  
+  font-family: "Unbounded" !important;
+  font-weight: 400 !important;
+}

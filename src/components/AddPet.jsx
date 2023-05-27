@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Select from "react-select";
 import CreatableSelect from 'react-select/creatable';
-import { dietaryOptions,routes, toast_config } from '../constants';
+import { dietaryOptions, routes, toast_config } from '../constants';
 import { useNavigate } from 'react-router-dom'
 import "../CSS/addPet.css"
 
@@ -137,7 +137,7 @@ const AddPet = () => {
                         <><label htmlFor="ownerIdInput" className="form-label">Owner Id</label>
                             <input type="text" name="ownerId" value={ownerId} onChange={handleInputChange} className="form-control shadow-none" id="ownerIdInput" placeholder='646xxx4d6f5e1xxx4fbb7xxx8c' /></>}
 
-                            <label htmlFor="breedPetInput" className="form-label">Breed*</label>
+                    <label htmlFor="breedPetInput" className="form-label">Breed*</label>
                     <input type="text" name="breed" value={breed} onChange={handleInputChange} className="form-control shadow-none" id="breedPetInput" placeholder='Correct format: Pit Bull' />
 
                     <label htmlFor="heightInput" className="form-label">Height (sm)*</label>

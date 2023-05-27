@@ -14,7 +14,7 @@
 }
 
 .MuiDataGrid-cell[data-field="breed"] {
-  word-break:normal!important;
+  word-break: normal !important;
 }
 
 .css-12u49z-MuiDataGrid-root {
@@ -98,7 +98,7 @@
   background-color: #ffbdff !important;
 }
 
-.MuiCircularProgress-root{
-margin-top:5rem;
-margin-left:calc(50% - 20px);
+.MuiCircularProgress-root {
+  margin-top: 5rem;
+  margin-left: calc(50% - 20px);
 }

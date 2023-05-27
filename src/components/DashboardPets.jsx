@@ -47,7 +47,7 @@ function DashboardPets() {
             width: 80,
             renderCell: (params) => (
                 <>
-                    <ModeEditIcon onClick={()=>navigate(routes.putPet.replace(':pet_id', params.id))}/>
+                    <ModeEditIcon onClick={() => navigate(routes.putPet.replace(':pet_id', params.id))} />
                     <OpenInFullIcon onClick={() => handleOpenInFull(params.id)} />
                 </>
 

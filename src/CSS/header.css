@@ -55,8 +55,8 @@
   text-decoration: none;
   background-color: #8b4100;
 }
-.dropdown-content>:first-child {
-  margin-top: 9px
+.dropdown-content > :first-child {
+  margin-top: 9px;
 }
 
 .dropdown-content *:hover {
@@ -65,7 +65,7 @@
   cursor: pointer;
 }
 
-.admin-header *:hover{
+.admin-header *:hover {
   color: #ffff00;
   background-color: #005fff;
 }
@@ -83,7 +83,7 @@
 
 .userSVG {
   width: 30px;
-  margin-right:10px;
+  margin-right: 10px;
 }
 
 .HeaderProfile {

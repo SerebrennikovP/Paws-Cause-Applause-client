@@ -25,13 +25,12 @@
 }
 
 .already-have-account span {
-    margin-left:2rem;
-    font-family: "Unbounded";
-    font-weight: 900;
-    color: #ffff00;
-  }
-  .already-have-account span:hover {
-    cursor: pointer;
-    color: #ffbdff;
-  }
-  
+  margin-left: 2rem;
+  font-family: "Unbounded";
+  font-weight: 900;
+  color: #ffff00;
+}
+.already-have-account span:hover {
+  cursor: pointer;
+  color: #ffbdff;
+}

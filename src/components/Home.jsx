@@ -74,6 +74,8 @@ const Home = () => {
     };
   };
 
+
+
   useEffect(() => {
     modalSignUpShow && handleMouseEnter()
   }, [modalSignUpShow])
@@ -139,7 +141,7 @@ const Home = () => {
               <CardPet key={pet._id} pet={pet} />
             ))}
         </div>
-        {isVisibleBar && (
+        {isVisibleBar && randomPets.length > 0 && (
           <div className={`overlay-layer ${isIn ? "in" : "out"}`}>
             <img
               src={

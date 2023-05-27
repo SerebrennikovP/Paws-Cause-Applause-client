@@ -1,53 +1,54 @@
-.form-label{
-    padding-top:6px;
-  }
-  
-  .editingProfile,.editingProfile *{
-    border: 0 !important;
-    box-shadow: none!important;
-    font-family: 'Quicksand', sans-serif!important;
-  }
-
-  .country-name{
-    color: black !important;
-  }
-
-  .phone-input-wrapper *:disabled:hover{
-    cursor:text;
-  }
-  
-  .profile-Container{
-    padding:2rem;
-    color: #f9eee2;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
-    border-radius: 12px;
-    background: #005fff;
-    max-width: 500px;
-    margin:4rem auto ;
-  }
-
-  .profile-Container .btn{
-    padding:1rem;
-    width:50%;
-    font-weight: 900;
-    font-size: 1rem;
-    border-radius: 0;
-    color:#005fff;
-    background-color: #ffff00;
-    border:0;
-    font-family: "Unbounded";
-    font-weight: 900;
+.form-label {
+  padding-top: 6px;
 }
 
-.profile-Container .btn:hover{
-  color:#8b4100;
+.editingProfile,
+.editingProfile * {
+  border: 0 !important;
+  box-shadow: none !important;
+  font-family: "Quicksand", sans-serif !important;
 }
 
-.react-tel-input input{
-  font-family: 'Quicksand', sans-serif!important;
+.country-name {
+  color: black !important;
+}
+
+.phone-input-wrapper *:disabled:hover {
+  cursor: text;
+}
+
+.profile-Container {
+  padding: 2rem;
+  color: #f9eee2;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  background: #005fff;
+  max-width: 500px;
+  margin: 4rem auto;
+}
+
+.profile-Container .btn {
+  padding: 1rem;
+  width: 50%;
+  font-weight: 900;
+  font-size: 1rem;
+  border-radius: 0;
+  color: #005fff;
+  background-color: #ffff00;
+  border: 0;
+  font-family: "Unbounded";
+  font-weight: 900;
+}
+
+.profile-Container .btn:hover {
+  color: #8b4100;
+}
+
+.react-tel-input input {
+  font-family: "Quicksand", sans-serif !important;
   border: 0 !important;
 }
-.profile-Container input{
+.profile-Container input {
   border: 0 !important;
 }
 
@@ -61,7 +62,7 @@ textarea[readonly] {
   color: #f9eee2;
 }
 
-.profile-Container label{
+.profile-Container label {
   font-family: "Unbounded";
   font-weight: 400;
 }

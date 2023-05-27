@@ -103,7 +103,7 @@ function DashboardUsers() {
 
     const rows = users;
 
-    return (users.length===0 ?
+    return (users.length === 0 ?
         <CircularProgress /> :
         <div className='table-users' style={{ height: '100%' }}>
             <DataGrid
