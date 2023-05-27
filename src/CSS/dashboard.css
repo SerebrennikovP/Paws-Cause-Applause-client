@@ -1,0 +1,104 @@
+.button-headers-dashboard {
+  text-align: center;
+}
+
+.table-users,
+.table-pets {
+  color: #f9eee2;
+  margin: 2rem;
+  width: calc(100vw - 4rem);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  background: #005fff;
+  word-break: break-all;
+}
+
+.MuiDataGrid-cell[data-field="breed"] {
+  word-break:normal!important;
+}
+
+.css-12u49z-MuiDataGrid-root {
+  border-width: 0 !important;
+}
+
+.table-users *,
+.table-pets * {
+  color: #f9eee2;
+}
+
+.table-users *::selection,
+.table-pets *::selection {
+  color: #005fff;
+  background-color: #ffff00;
+}
+
+.favoriteLinks {
+  padding: 10px 0;
+  padding-right: 10px;
+}
+
+.favoriteLinks:hover {
+  color: #ffff00;
+}
+
+.favorite-links-wrapper:not(:hover) {
+  max-height: 80px;
+  overflow-y: hidden;
+}
+
+.bio-dashboard-wrapper:not(:hover) {
+  max-height: 80px;
+  overflow-y: hidden;
+}
+
+.my-pets-links {
+  padding: 10px 0;
+  padding-right: 10px;
+}
+
+.my-pets-links:hover {
+  color: #ffff00;
+}
+
+.my-pets-links-wrapper:not(:hover) {
+  max-height: 80px;
+  overflow-y: hidden;
+}
+
+.hello-admin {
+  font-family: "Unbounded";
+  flex-direction: column;
+  font-weight: 900;
+  color: #8b4100;
+  font-size: 3rem;
+  text-align: center;
+  margin: 3rem;
+}
+
+.button-headers-dashboard button {
+  padding: 1rem;
+  width: 250px;
+  font-weight: 900;
+  font-size: 1rem;
+  border-radius: 0;
+  border: 0;
+  font-family: "Unbounded";
+  font-weight: 900;
+}
+
+.button-users-admin[aria-pressed="true"],
+.button-users-admin:hover {
+  color: #005fff !important;
+  background-color: #ffff00 !important;
+}
+
+.button-pets-admin[aria-pressed="true"],
+.button-pets-admin:hover {
+  color: #005fff !important;
+  background-color: #ffbdff !important;
+}
+
+.MuiCircularProgress-root{
+margin-top:5rem;
+margin-left:calc(50% - 20px);
+}

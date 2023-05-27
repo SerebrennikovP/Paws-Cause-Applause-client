@@ -13,6 +13,7 @@ import PetPage from './components/PetPage';
 import PetContext from './context/PetContext';
 import { ToastContainer } from 'react-toastify';
 import AddPet from './components/AddPet';
+import PutPet from './components/PutPet';
 import Dashboard from './components/Dashboard';
 
 const App = () => {
@@ -42,6 +43,7 @@ const App = () => {
                             <Route path={routes.petPage} element={<PetPage />} />
                             <Route path={routes.dashboard} element={<Dashboard />} />
                             <Route path={routes.addPet} element={<AddPet />} />
+                            <Route path={routes.putPet} element={<PutPet />} />
                         </Routes>
                     </div>}
             </PetContext>

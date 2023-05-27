@@ -8,6 +8,7 @@ export const routes = {
   searchPageDogs: '/searchDogs',
   petPage: '/PetPage/:pet_id',
   addPet: '/addPet',
+  putPet:'/putPet/:pet_id',
   dashboard: '/dashboard'
 };
 
@@ -26,3 +27,5 @@ export const toast_config = {
   progress: undefined,
   theme: "light",
 }
+
+export const IDs_creators=["646e147c7c8a09352a0c6170"]

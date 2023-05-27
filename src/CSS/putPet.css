@@ -1,4 +1,4 @@
-.AddPet {
+.PutPet {
   margin: 2rem 4rem;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
   border-radius: 12px;
@@ -6,12 +6,12 @@
   display: flex;
   flex-direction: row;
 }
-.AddPet form {
+.PutPet form {
   display: flex;
   flex-flow: row wrap;
   width: 100%;
 }
-.AddPet label {
+.PutPet label {
   color: #f9eee2;
 }
 .block1,
@@ -20,7 +20,7 @@
   padding: 3rem;
 }
 
-.buttonAddPet {
+.buttonPutPet {
   width: 100%;
   background-color: #ffff00;
   color: #005fff;
@@ -30,7 +30,7 @@
   margin-top: 30px;
 }
 
-.buttonAddPet:hover {
+.buttonPutPet:hover {
   width: 100%;
   background-color: #8b4100;
   color: #ffff00;
@@ -64,4 +64,8 @@
 
 textarea {
   min-height: 112px !important;
+}
+
+.pet-image-put{
+  height:153px;
 }
