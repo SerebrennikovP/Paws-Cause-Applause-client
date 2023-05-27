@@ -66,7 +66,7 @@ const PutPet = () => {
 
     const putPetSchema = yup.object().shape({
         type: yup.string().oneOf(['Dog', 'Cat']).required('Pet type is required'),
-        adoption_status: yup.string().oneOf(['Available', 'Fostered']).required('Adoption status is required'),
+        adoption_status: yup.string().oneOf(['Available', 'Fostered', 'Adopted']).required('Adoption status is required'),
         name: yup.string().required('Name is required'),
         ownerId: yup.string(),
         height: yup
@@ -145,7 +145,7 @@ const PutPet = () => {
                         value={adoptionStatus}
                         onChange={(option) => setAdoptionStatus(option)}
                         name="adoptionStatus"
-                        options={[{ label: "Available", value: "Available" }, { label: "Fostered", value: "Fostered" }]}
+                        options={[{ label: "Available", value: "Available" }, { label: "Fostered", value: "Fostered" }, { label: "Adopted", value: "Adopted" }]}
                         className="basic-single"
                         classNamePrefix="select"
                         id="statusPetInput"

@@ -32,6 +32,7 @@ const AddPet = () => {
 
     const [adoptionStatus, setAdoptionStatus] = useState({ label: "Available", value: "Available" });
     const isFostered = JSON.stringify(adoptionStatus) == '{"label":"Fostered","value":"Fostered"}'
+    const isAdopted = JSON.stringify(adoptionStatus) == '{"label":"Adopted","value":"Adopted"}'
     const [dietaryRestrictions, setDietaryRestrictions] = useState([]);
 
     function handleInputChange(event) {
@@ -41,7 +42,7 @@ const AddPet = () => {
 
     const addPetSchema = yup.object().shape({
         type: yup.string().oneOf(['Dog', 'Cat']).required('Pet type is required'),
-        adoption_status: yup.string().oneOf(['Available', 'Fostered']).required('Adoption status is required'),
+        adoption_status: yup.string().oneOf(['Available', 'Fostered', 'Adopted']).required('Adoption status is required'),
         name: yup.string().required('Name is required'),
         ownerId: yup.string(),
         height: yup
@@ -130,12 +131,12 @@ const AddPet = () => {
                         value={adoptionStatus}
                         onChange={(option) => setAdoptionStatus(option)}
                         name="adoptionStatus"
-                        options={[{ label: "Available", value: "Available" }, { label: "Fostered", value: "Fostered" }]}
+                        options={[{ label: "Available", value: "Available" }, { label: "Fostered", value: "Fostered" }, { label: "Adopted", value: "Adopted" }]}
                         className="basic-single"
                         classNamePrefix="select"
                         id="statusPetInput"
                     />
-                    {isFostered &&
+                    {(isFostered || isAdopted) &&
                         <><label htmlFor="ownerIdInput" className="form-label">Owner Id</label>
                             <input type="text" name="ownerId" value={ownerId} onChange={handleInputChange} className="form-control shadow-none" id="ownerIdInput" placeholder='646xxx4d6f5e1xxx4fbb7xxx8c' /></>}
 
