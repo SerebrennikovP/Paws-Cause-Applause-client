@@ -7,12 +7,13 @@ import axios from 'axios';
 import "../CSS/petPage.css"
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import ShareIcon from '@mui/icons-material/Share';
 
 
 function PetPage() {
 
     const { userId, token, setModalSignUpShow, userObj } = useContext(UserContextInstance)
-    const { setIsLoadingCards, isLoadingCards, handleFavorite } = useContext(PetContextInstance)
+    const { setIsLoadingCards, isLoadingCards, handleFavorite, handleClipboard } = useContext(PetContextInstance)
     const [pet, setPet] = useState({})
     const [favoritedPetPage, setFavoritedPetPage] = useState(false)
     const [buttons, setButtons] = useState({ "return": true, "foster": true, "adopt": true })
@@ -75,6 +76,9 @@ function PetPage() {
                     <h1>{pet.name?.toUpperCase()}</h1>
                     <div className="image-wrapper-pet-page">
                         <img src={pet.picture} alt={pet.name} />
+                        <IconButton aria-label="share" onClick={() => handleClipboard(pet_id)}>
+                            <ShareIcon />
+                        </IconButton>
                         <IconButton aria-label="add to favorites" onClick={() => handleFavorite(pet_id, favoritedPetPage, setFavoritedPetPage)}>
                             {favoritedPetPage ? <FavoriteIcon color="error" /> : <FavoriteIcon />}
                         </IconButton></div>

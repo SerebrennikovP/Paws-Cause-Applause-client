@@ -141,8 +141,10 @@ const Home = () => {
               <CardPet key={pet._id} pet={pet} />
             ))}
         </div>
-        {isVisibleBar && randomPets.length > 0 && (
-          <div className={`overlay-layer ${isIn ? "in" : "out"}`}>
+        {isVisibleBar && randomPets.length > 0 && happyDog && sadDog && happyCat && sadCat && (
+          <div style={{
+            opacity: isVisibleBar && randomPets.length > 0 && happyDog && sadDog && happyCat && sadCat ? 1 : 0
+          }} className={`overlay-layer ${isIn ? "in" : "out"}`}>
             <img
               src={
                 changeBar === 0
@@ -157,7 +159,7 @@ const Home = () => {
           </div>
         )}
       </div>
-    </div>
+    </div >
   );
 };
 

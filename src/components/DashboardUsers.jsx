@@ -103,6 +103,11 @@ function DashboardUsers() {
 
     const rows = users;
 
+    const [paginationModel, setPaginationModel] = useState({
+        pageSize: 25,
+        page: 0,
+    });
+
     return (users.length === 0 ?
         <CircularProgress /> :
         <div className='table-users' style={{ height: '100%' }}>
@@ -111,12 +116,8 @@ function DashboardUsers() {
                 columns={columns}
                 autoHeight
                 getRowHeight={() => 'auto'}
-                initialState={{
-                    pagination: {
-                        paginationModel: { page: 0, pageSize: 5 },
-                    },
-                }}
-                pageSizeOptions={[5, 10]}
+                paginationModel={paginationModel}
+                onPaginationModelChange={setPaginationModel}
             />
         </div>
     );

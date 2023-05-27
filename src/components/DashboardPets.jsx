@@ -46,10 +46,10 @@ function DashboardPets() {
             headerName: 'Actions',
             width: 80,
             renderCell: (params) => (
-                <>
-                    <ModeEditIcon onClick={() => navigate(routes.putPet.replace(':pet_id', params.id))} />
-                    <OpenInFullIcon onClick={() => handleOpenInFull(params.id)} />
-                </>
+                <span className='actions-block'>
+                    <span className='ModeEditIcon'> <ModeEditIcon onClick={() => navigate(routes.putPet.replace(':pet_id', params.id))} /></span>
+                    <span className='OpenInFullIcon'><OpenInFullIcon onClick={() => handleOpenInFull(params.id)} /></span>
+                </span>
 
             ),
         },
@@ -57,7 +57,10 @@ function DashboardPets() {
         { field: 'owner_id', headerName: 'Owner id', width: 220, },
         { field: 'date', headerName: 'Added date', type: 'dateTime', width: 170, valueGetter: (params) => new Date(params.value) },
     ];
-
+    const [paginationModel, setPaginationModel] = useState({
+        pageSize: 25,
+        page: 0,
+    });
     const rows = pets;
 
     return (pets.length === 0 ?
@@ -68,12 +71,8 @@ function DashboardPets() {
                 columns={columns}
                 autoHeight
                 getRowHeight={() => 'auto'}
-                initialState={{
-                    pagination: {
-                        paginationModel: { page: 0, pageSize: 5 },
-                    },
-                }}
-                pageSizeOptions={[5, 10]}
+                paginationModel={paginationModel}
+                onPaginationModelChange={setPaginationModel}
             />
         </div>
     );

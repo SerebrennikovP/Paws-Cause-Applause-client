@@ -102,3 +102,9 @@
   margin-top: 5rem;
   margin-left: calc(50% - 20px);
 }
+
+.ModeEditIcon:hover *,
+.OpenInFullIcon:hover * {
+  cursor: pointer;
+  color: #8b4100;
+}

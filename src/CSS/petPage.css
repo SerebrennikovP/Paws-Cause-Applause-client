@@ -87,8 +87,19 @@
 
 .image-wrapper-pet-page button {
   position: absolute;
-  bottom: 0;
-  right: 0;
   background-color: #ffffff76;
   margin: 5px;
+  right: 0;
+}
+
+.image-wrapper-pet-page button[aria-label="add to favorites"] {
+  bottom: 0;
+}
+
+.image-wrapper-pet-page button[aria-label="share"] {
+  right: 0;
+}
+
+.image-wrapper-pet-page button:hover {
+background-color: #ffbdff;
 }

@@ -90,14 +90,16 @@ const AddPet = () => {
             await addPetSchema.validate({ ...petData, petImage });
             const res = await axios.post('http://localhost:8080/pet/add', formData, { headers: { Authorization: `Bearer ${token}` } });
 
-            if (res) {
+            if (res.data._id) {
+                console.log(res.data)
                 toast.success('Pet added', toast_config);
                 setInputs(initialInputs)
+                navigate(routes.petPage.replace(':pet_id', res.data._id))
             }
         }
         catch (error) {
             if (error instanceof yup.ValidationError) {
-                toast.warn(error.message, toast_config);
+                toast.warn(error.message, toast_config)
             } else {
                 console.log(error)
                 toast.warn(error, toast_config)
@@ -141,7 +143,7 @@ const AddPet = () => {
                     <input type="text" name="breed" value={breed} onChange={handleInputChange} className="form-control shadow-none" id="breedPetInput" placeholder='Correct format: Pit Bull' />
 
                     <label htmlFor="heightInput" className="form-label">Height (sm)*</label>
-                    <input type="number" name="height" value={height} onChange={handleInputChange} className="form-control shadow-none" id="heightInput" placeholder='Correct format: 128' />
+                    <input type="number" name="height" value={height} onChange={handleInputChange} className="form-control shadow-none" id="heightInput" placeholder='Correct format: 28' />
 
                     <label htmlFor="weightInput" className="form-label">Weight (kg)*</label>
                     <input type="number" name="weight" value={weight} onChange={handleInputChange} className="form-control shadow-none" id="weightInput" placeholder='Correct format: 7.1' />
