@@ -14,7 +14,7 @@ const PetContext = ({ children }) => {
     const [isMyPetsPage, setIsMyPetsPage] = useState(0)
 
     const handleClipboard = (petID) => {
-        navigator.clipboard.writeText(`http://localhost:3000/PetPage/${petID}`)
+        navigator.clipboard.writeText(`https://paws-cause-applause-serebrennikovp.vercel.app/PetPage/${petID}`)
         toast.info('Link copied', toast_config);
     };
 

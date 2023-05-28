@@ -37,10 +37,6 @@
   padding-right: 10px;
 }
 
-.favoriteLinks:hover {
-  color: #ffff00;
-}
-
 .favorite-links-wrapper:not(:hover) {
   max-height: 80px;
   overflow-y: hidden;
@@ -56,8 +52,10 @@
   padding-right: 10px;
 }
 
-.my-pets-links:hover {
+.my-pets-links:hover,
+.favoriteLinks:hover {
   color: #ffff00;
+  cursor: pointer;
 }
 
 .my-pets-links-wrapper:not(:hover) {

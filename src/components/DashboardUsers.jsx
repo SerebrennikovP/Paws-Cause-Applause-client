@@ -6,11 +6,17 @@ import Checkbox from '@mui/material/Checkbox';
 import { IDs_creators, toast_config } from "../constants"
 import { toast } from 'react-toastify';
 import CircularProgress from '@mui/material/CircularProgress';
+import PetPageModal from '../modal/PetPageModal';
 
 function DashboardUsers() {
 
     const { token, userId } = useContext(UserContextInstance)
+    const [modalPetPageShow, setModalPetPageShow] = useState(false)
     const [users, setUsers] = useState([])
+    const [updateGetPets, setUpdateGetPets] = useState(false)
+    const [isMyPets, setIsMyPets] = useState(false)
+    const [isFavorite, setIsFavorite] = useState(false)
+
 
     useEffect(() => {
         async function getUsers() {
@@ -28,7 +34,8 @@ function DashboardUsers() {
             }
         }
         getUsers();
-    }, []);
+
+    }, [updateGetPets]);
 
     const handleIsAdminChange = async (id, value) => {
         try {
@@ -53,8 +60,8 @@ function DashboardUsers() {
         { field: 'id', headerName: 'ID', width: 90 },
         { field: 'name', headerName: 'Name', width: 150 },
         { field: 'lastname', headerName: 'Lastname', width: 150 },
-        { field: 'email', headerName: 'Email', width: 240, },
-        { field: 'phone', headerName: 'Phone', width: 120, },
+        { field: 'email', headerName: 'Email', width: 280, },
+        { field: 'phone', headerName: 'Phone', width: 140, },
         {
             field: 'isAdmin', headerName: 'is Admin?', type: 'boolean', width: 90,
             renderCell: (params) => (
@@ -70,9 +77,17 @@ function DashboardUsers() {
             field: 'myPetsArray', headerName: 'Adopted/Fostered', width: 230, renderCell: (params) => (
                 <div className='my-pets-links-wrapper'>
                     {params.formattedValue.map((element, index) => (
-                        <a className='my-pets-links' key={index} href={`http://localhost:3000/PetPage/${element}`} style={{ display: 'flex' }}>
+                        <div key={index}><a className='my-pets-links' onClick={() => { setIsMyPets(true); setModalPetPageShow(element) }} style={{ display: 'flex' }}>
                             {element}
                         </a>
+                            {isMyPets && !isFavorite && <PetPageModal
+                                show={isMyPets && modalPetPageShow === element}
+                                onHide={() => { setModalPetPageShow(false); setIsMyPets(false) }}
+                                pet_id={element}
+                                onChangeAny={() => setUpdateGetPets(!updateGetPets)}
+                                isClosedByReturn={() => { setIsFavorite(false); setIsMyPets(false) }}
+                                isClosedByUnfavorite={() => {}}
+                            />}</div>
                     ))
                     }
                 </div >
@@ -90,9 +105,17 @@ function DashboardUsers() {
             field: 'favorite', headerName: 'Favorite', width: 230, renderCell: (params) => (
                 <div className='favorite-links-wrapper'>
                     {params.formattedValue.map((element, index) => (
-                        <a className='favoriteLinks' key={index} href={`http://localhost:3000/PetPage/${element}`} style={{ display: 'flex' }}>
+                        <div key={index}><a className='favoriteLinks' onClick={() => { setModalPetPageShow(element); setIsFavorite(true) }} style={{ display: 'flex' }}>
                             {element}
                         </a>
+                            {isFavorite && !isMyPets && <PetPageModal
+                                show={isFavorite && modalPetPageShow === element}
+                                onHide={() => { setModalPetPageShow(false); setIsFavorite(false); setIsMyPets(false) }}
+                                pet_id={element}
+                                onChangeAny={() => setUpdateGetPets(!updateGetPets)}
+                                isClosedByUnfavorite={() => { setIsFavorite(false); setIsMyPets(false) }}
+                                isClosedByReturn={() => {}}
+                            />}</div>
                     ))
                     }
                 </div >

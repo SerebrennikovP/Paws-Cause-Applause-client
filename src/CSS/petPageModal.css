@@ -1,0 +1,102 @@
+.PetPageModal img {
+    width: 300px;
+  }
+  .PetPageModal {
+    padding: 2rem;
+    color: #f9eee2;
+    background: #005fff;
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .pet-about {
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    flex: 1;
+    margin-right: 1rem;
+  }
+  .pet-about p {
+    margin-top: 1rem;
+    margin-bottom: 0;
+  }
+  
+  .pet-about h1 {
+    font-family: "Unbounded";
+    font-weight: 900;
+    color: #ffbdff;
+  }
+  
+  .pet-buttons {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    font-family: "Unbounded";
+  }
+  .pet-buttons * {
+    padding: 1rem 1rem;
+    font-weight: 900;
+    font-size: 1rem;
+    color: #005fff;
+    margin-bottom: 1rem;
+    background-color: #ffff00;
+  }
+  
+  .pet-buttons *:hover {
+    font-size: 1.2rem;
+  }
+  
+  .pet-about-info {
+    margin-left: 1rem;
+    padding: 2rem;
+    color: #f9eee2;
+  }
+  
+  .pet-about-info > :first-child {
+    margin-top: 0;
+  }
+  
+  .pet-about-info span {
+    color: #ffbdff;
+    font-family: "Unbounded";
+    font-weight: 900;
+    margin-right: 0.7rem;
+  }
+  
+  .btn.password {
+    padding: 1rem 0;
+    font-weight: 900;
+    font-size: 1rem;
+    color: #f9eee2;
+    margin-bottom: 1rem;
+    background-color: #8b4100;
+    width: 100%;
+  }
+  
+  .btn.password:hover {
+    color: #ffbdff;
+  }
+  
+  .image-wrapper-pet-page {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .image-wrapper-pet-page button {
+    position: absolute;
+    background-color: #ffffff76;
+    margin: 5px;
+    right: 0;
+  }
+  
+  .image-wrapper-pet-page button[aria-label="add to favorites"] {
+    bottom: 0;
+  }
+  
+  .image-wrapper-pet-page button[aria-label="share"] {
+    right: 0;
+  }
+  
+  .image-wrapper-pet-page button:hover {
+  background-color: #ffbdff;
+  }

@@ -7,11 +7,14 @@ import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import CircularProgress from '@mui/material/CircularProgress';
 import { routes } from "../constants"
 import { useNavigate } from 'react-router-dom'
+import PetPageModal from '../modal/PetPageModal';
 
 function DashboardPets() {
     const navigate = useNavigate()
+    const [modalPetPageShow, setModalPetPageShow] = useState(false)
     const { token } = useContext(UserContextInstance)
     const [pets, setPets] = useState([])
+    const [updateGetPets, setUpdateGetPets] = useState(false)
 
     useEffect(() => {
         async function getPets() {
@@ -29,12 +32,7 @@ function DashboardPets() {
             }
         }
         getPets();
-    }, []);
-
-    const handleOpenInFull = (id) => {
-        const url = routes.petPage.replace(':pet_id', id);
-        window.open(url, '_blank');
-    };
+    }, [updateGetPets]);
 
     const columns = [
         { field: 'id', headerName: 'ID', width: 220 },
@@ -48,7 +46,15 @@ function DashboardPets() {
             renderCell: (params) => (
                 <span className='actions-block'>
                     <span className='ModeEditIcon'> <ModeEditIcon onClick={() => navigate(routes.putPet.replace(':pet_id', params.id))} /></span>
-                    <span className='OpenInFullIcon'><OpenInFullIcon onClick={() => handleOpenInFull(params.id)} /></span>
+                    <span className='OpenInFullIcon'><OpenInFullIcon onClick={() => setModalPetPageShow(params.id)} /></span>
+                    <PetPageModal
+                        show={modalPetPageShow === params.id}
+                        onHide={() => setModalPetPageShow(false)}
+                        pet_id={params.id}
+                        onChangeAny={() => setUpdateGetPets(!updateGetPets)}
+                        isClosedByReturn={() => { }}
+                        isClosedByUnfavorite={() => { }}
+                    />
                 </span>
 
             ),
