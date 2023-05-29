@@ -143,7 +143,7 @@ const AddPet = () => {
                     <label htmlFor="breedPetInput" className="form-label">Breed*</label>
                     <input type="text" name="breed" value={breed} onChange={handleInputChange} className="form-control shadow-none" id="breedPetInput" placeholder='Correct format: Pit Bull' />
 
-                    <label htmlFor="heightInput" className="form-label">Height (sm)*</label>
+                    <label htmlFor="heightInput" className="form-label">Height (cm)*</label>
                     <input type="number" name="height" value={height} onChange={handleInputChange} className="form-control shadow-none" id="heightInput" placeholder='Correct format: 28' />
 
                     <label htmlFor="weightInput" className="form-label">Weight (kg)*</label>

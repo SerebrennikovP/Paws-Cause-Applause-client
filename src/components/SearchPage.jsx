@@ -134,7 +134,7 @@ function SearchPage({ type }) {
           onChange={(event, value) => setHeightRange(value)}
           valueLabelDisplay="auto"
           max={type == "Dog" ? 100 : 70}
-          valueLabelFormat={(value) => `${value} sm`}
+          valueLabelFormat={(value) => `${value} cm`}
           sx={{
             color: '#8b4100',
           }}

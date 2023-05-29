@@ -89,7 +89,7 @@ function PetPageModal({ isClosedByUnfavorite,isClosedByReturn, pet_id, onChangeA
                     <div className="pet-about-info">
                         <p><span>Adoption Status:</span>{pet.adoption_status}</p>
                         <p><span>Breed:</span>{pet.breed}</p>
-                        <p><span>Height:</span>{pet.height} sm</p>
+                        <p><span>Height:</span>{pet.height} cm</p>
                         <p><span>Weight:</span>{pet.weight} kg</p>
                         <p><span>Color:</span>{pet.color}</p>
                         {pet.bio && <p><span>Bio:</span>{pet.bio}</p>}
