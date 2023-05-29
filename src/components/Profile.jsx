@@ -70,6 +70,9 @@ const Profile = () => {
         if (error instanceof yup.ValidationError) {
           toast.warn(error.message, toast_config);
         } else {
+          if (error.response?.status === 409) {
+            toast.warn('User with this email already exists', toast_config)
+          }
           console.log(error);
         }
       }
